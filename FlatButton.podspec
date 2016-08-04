@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name              = 'FlatButton'
-s.version           = '0.0.1'
+s.version           = '0.0.2'
 s.summary           = 'Layer based NSButton with Interface Builder exposed style options'
 s.homepage          = 'https://github.com/OskarGroth/FlatButton'
 s.license           = {
@@ -13,7 +13,7 @@ s.author            = {
 }
 s.source            = {
 :git => 'https://github.com/OskarGroth/FlatButton.git',
-:tag => "0.0.1"
+:tag => "0.0.2"
 }
 s.platform     = :osx, '10.9'
 s.source_files = 'FlatButton/FlatButton.{swift}'
