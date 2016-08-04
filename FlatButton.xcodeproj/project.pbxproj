@@ -12,6 +12,7 @@
 		75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75935E311D534A1A0069AF86 /* MainMenu.xib */; };
 		75935E3C1D534DD90069AF86 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
 		75935E3D1D534DD90069AF86 /* LayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3B1D534DD90069AF86 /* LayerDelegate.swift */; };
+		75935E411D535A3F0069AF86 /* NSColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E401D535A3F0069AF86 /* NSColor+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		75935E341D534A1A0069AF86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75935E3A1D534DD90069AF86 /* FlatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
 		75935E3B1D534DD90069AF86 /* LayerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerDelegate.swift; sourceTree = "<group>"; };
+		75935E401D535A3F0069AF86 /* NSColor+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				75935E3A1D534DD90069AF86 /* FlatButton.swift */,
 				75935E3B1D534DD90069AF86 /* LayerDelegate.swift */,
+				75935E401D535A3F0069AF86 /* NSColor+Utils.swift */,
 				75935E2D1D534A1A0069AF86 /* AppDelegate.swift */,
 				75935E2F1D534A1A0069AF86 /* Assets.xcassets */,
 				75935E311D534A1A0069AF86 /* MainMenu.xib */,
@@ -138,6 +141,7 @@
 			files = (
 				75935E3C1D534DD90069AF86 /* FlatButton.swift in Sources */,
 				75935E3D1D534DD90069AF86 /* LayerDelegate.swift in Sources */,
+				75935E411D535A3F0069AF86 /* NSColor+Utils.swift in Sources */,
 				75935E2E1D534A1A0069AF86 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
