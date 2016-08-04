@@ -9,7 +9,7 @@
 import Cocoa
 import CoreGraphics
 
-class FlatButton: NSButton {
+class FlatButton: NSButton, CALayerDelegate {
     
     private var titleLayer = CATextLayer()
     private var mouseDown = Bool()
@@ -24,7 +24,7 @@ class FlatButton: NSButton {
     }
     @IBInspectable var color: NSColor = NSColor.blue {
         didSet {
-            alternateColor = color.darker()
+            alternateColor = tintColor(color: color)
             if fill {
                 layer?.backgroundColor = color.cgColor
                 layer?.borderColor = NSColor.clear.cgColor
@@ -41,8 +41,8 @@ class FlatButton: NSButton {
         wantsLayer = true
         layer?.cornerRadius = 4
         layer?.borderWidth = 1
-        layer?.delegate = LayerDelegate.shared
-        titleLayer.delegate = LayerDelegate.shared
+        layer?.delegate = self
+        titleLayer.delegate = self
         let attributes = [NSFontAttributeName: font!]
         let size = title.size(withAttributes: attributes)
         titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
@@ -54,8 +54,8 @@ class FlatButton: NSButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer?.contentsScale = LayerDelegate.shared.scale(sender: self)
-        titleLayer.contentsScale = LayerDelegate.shared.scale(sender: self)
+        layer?.contentsScale = window!.backingScaleFactor
+        titleLayer.contentsScale = window!.backingScaleFactor
         let trackingArea = NSTrackingArea(rect: bounds, options: [.activeAlways, .mouseEnteredAndExited], owner: self, userInfo: nil)
         addTrackingArea(trackingArea)
     }
@@ -64,7 +64,7 @@ class FlatButton: NSButton {
         layer?.removeAllAnimations()
         titleLayer.removeAllAnimations()
         let duration = isOn ? 0.01 : 0.1
-
+        
         var bgColor = (fill || isOn) ? color.cgColor : NSColor.clear.cgColor
         if fill && isOn {
             bgColor = alternateColor.cgColor
@@ -132,6 +132,17 @@ class FlatButton: NSButton {
         }
     }
     
+    private func tintColor(color: NSColor) -> NSColor {
+        var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
+        let rgbColor = color.usingColorSpaceName(NSCalibratedRGBColorSpace)
+        rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return NSColor(hue: h, saturation: s, brightness: b == 0 ? 0.2 : b * 0.8, alpha: a)
+    }
+    
+    override func layer(_ layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool {
+        return true
+    }
+
     override func draw(_ dirtyRect: NSRect) {
         // Nothing here
     }
