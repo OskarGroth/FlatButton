@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		75935E2E1D534A1A0069AF86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E2D1D534A1A0069AF86 /* AppDelegate.swift */; };
-		75935E301D534A1A0069AF86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75935E2F1D534A1A0069AF86 /* Assets.xcassets */; };
 		75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75935E311D534A1A0069AF86 /* MainMenu.xib */; };
 		75935E3C1D534DD90069AF86 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
 /* End PBXBuildFile section */
@@ -16,7 +15,6 @@
 /* Begin PBXFileReference section */
 		75935E2A1D534A1A0069AF86 /* FlatButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlatButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75935E2D1D534A1A0069AF86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		75935E2F1D534A1A0069AF86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75935E321D534A1A0069AF86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		75935E341D534A1A0069AF86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75935E3A1D534DD90069AF86 /* FlatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
@@ -36,7 +34,7 @@
 		75935E211D534A1A0069AF86 = {
 			isa = PBXGroup;
 			children = (
-				75935E2C1D534A1A0069AF86 /* FlatButton */,
+				75935E2C1D534A1A0069AF86 /* FlatButton-macOS */,
 				75935E2B1D534A1A0069AF86 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,15 +47,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		75935E2C1D534A1A0069AF86 /* FlatButton */ = {
+		75935E2C1D534A1A0069AF86 /* FlatButton-macOS */ = {
 			isa = PBXGroup;
 			children = (
-				75935E3A1D534DD90069AF86 /* FlatButton.swift */,
 				75935E2D1D534A1A0069AF86 /* AppDelegate.swift */,
-				75935E2F1D534A1A0069AF86 /* Assets.xcassets */,
+				75935E3A1D534DD90069AF86 /* FlatButton.swift */,
 				75935E311D534A1A0069AF86 /* MainMenu.xib */,
 				75935E341D534A1A0069AF86 /* Info.plist */,
 			);
+			name = "FlatButton-macOS";
 			path = FlatButton;
 			sourceTree = "<group>";
 		};
@@ -121,7 +119,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75935E301D534A1A0069AF86 /* Assets.xcassets in Resources */,
 				75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,7 +242,6 @@
 		75935E381D534A1A0069AF86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = ZQK6SX26CE;
 				INFOPLIST_FILE = FlatButton/Info.plist;
@@ -260,7 +256,6 @@
 		75935E391D534A1A0069AF86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = ZQK6SX26CE;
 				INFOPLIST_FILE = FlatButton/Info.plist;
