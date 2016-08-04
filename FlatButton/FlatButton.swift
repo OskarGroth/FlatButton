@@ -38,6 +38,15 @@ class FlatButton: NSButton, CALayerDelegate {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setup()
+    }
+    
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    func setup() {
         wantsLayer = true
         layer?.cornerRadius = 4
         layer?.borderWidth = 1
@@ -54,8 +63,6 @@ class FlatButton: NSButton, CALayerDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer?.contentsScale = window!.backingScaleFactor
-        titleLayer.contentsScale = window!.backingScaleFactor
         let trackingArea = NSTrackingArea(rect: bounds, options: [.activeAlways, .mouseEnteredAndExited], owner: self, userInfo: nil)
         addTrackingArea(trackingArea)
     }
