@@ -5,7 +5,7 @@ Layer based NSButton with Interface Builder exposed style options.
 This is a subclass that lets you create beatiful NSButtons easily.
 Works great with `NSVisualEffectView`.
 
-<img src="https://s3.amazonaws.com/cindori/images/flatbutton.png" width="397">
+<img src="https://s3.amazonaws.com/cindori/images/flatbutton.png" width="440">
 
 ## Installation (CocoaPods)
 Configure your Podfile to use `FlatButton`:
