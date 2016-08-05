@@ -16,6 +16,8 @@ Configure your Podfile to use `FlatButton`:
 Create an `NSButton` in Interface Builder and set it's class to `FlatButton`.
 You can now style your button from the inspector:
 
+<img src="https://s3.amazonaws.com/cindori/images/inspector.png" width="300">
+
 The same values can be accessed from your code.
 
 ## License
