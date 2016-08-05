@@ -9,7 +9,7 @@
 import Cocoa
 import QuartzCore
 
-class FlatButton: NSButton {
+public class FlatButton: NSButton {
     
     private var titleLayer = CATextLayer()
     private var mouseDown = Bool()
