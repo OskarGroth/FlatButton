@@ -18,7 +18,7 @@ s.source            = {
 s.platform     = :osx, '10.9'
 s.source_files = 'FlatButton/FlatButton.{swift}'
 s.requires_arc = true
-s.screenshot   = "https://s3.amazonaws.com/cindori/images/FlatButton.png"
+s.screenshot   = "https://s3.amazonaws.com/cindori/images/flatbutton.png"
 s.social_media_url = "https://twitter.com/cindoriapps"
 
 end
