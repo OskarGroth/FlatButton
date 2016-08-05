@@ -11,9 +11,12 @@ Configure your Podfile to use `FlatButton`:
 
 ```pod 'FlatButton'```
 
-# Swift 3:
+If you are using Swift 3:
 
 ```pod 'FlatButton', :git => 'https://github.com/OskarGroth/FlatButton.git', :branch => "swift3"```
+
+If Xcode prompts you to convert project to Swift 3, you can choose Later and then edit the Pods xcodeproject build setting:
+`Use Legacy Swift Language Version` to `No`. This way you don't modify the pods.
 
 
 
