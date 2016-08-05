@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "75935E291D534A1A0069AF86"
-               BuildableName = "FlatButton-macOS.app"
-               BlueprintName = "FlatButton-macOS"
+               BuildableName = "FlatButton.app"
+               BlueprintName = "FlatButton"
                ReferencedContainer = "container:FlatButton.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "75935E291D534A1A0069AF86"
-            BuildableName = "FlatButton-macOS.app"
-            BlueprintName = "FlatButton-macOS"
+            BuildableName = "FlatButton.app"
+            BlueprintName = "FlatButton"
             ReferencedContainer = "container:FlatButton.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "75935E291D534A1A0069AF86"
-            BuildableName = "FlatButton-macOS.app"
-            BlueprintName = "FlatButton-macOS"
+            BuildableName = "FlatButton.app"
+            BlueprintName = "FlatButton"
             ReferencedContainer = "container:FlatButton.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "75935E291D534A1A0069AF86"
-            BuildableName = "FlatButton-macOS.app"
-            BlueprintName = "FlatButton-macOS"
+            BuildableName = "FlatButton.app"
+            BlueprintName = "FlatButton"
             ReferencedContainer = "container:FlatButton.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
