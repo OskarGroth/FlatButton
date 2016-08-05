@@ -11,26 +11,26 @@ import QuartzCore
 
 public class FlatButton: NSButton {
     
-    private var titleLayer = CATextLayer()
-    private var mouseDown = Bool()
-    private var alternateColor = NSColor()
+    internal var titleLayer = CATextLayer()
+    internal var mouseDown = Bool()
+    public var alternateColor = NSColor()
     
-    @IBInspectable var fill: Bool = false {
+    @IBInspectable public var fill: Bool = false {
         didSet {
             animateColor(state == NSOnState)
         }
     }
-    @IBInspectable var momentary: Bool = true {
+    @IBInspectable public var momentary: Bool = true {
         didSet {
             animateColor(state == NSOnState)
         }
     }
-    @IBInspectable var cornerRadius: CGFloat = 4 {
+    @IBInspectable public var cornerRadius: CGFloat = 4 {
         didSet {
             layer?.cornerRadius = cornerRadius
         }
     }
-    @IBInspectable var color: NSColor = NSColor.blueColor() {
+    @IBInspectable public var color: NSColor = NSColor.blueColor() {
         didSet {
             alternateColor = tintColor(color)
             if fill {
@@ -44,7 +44,7 @@ public class FlatButton: NSButton {
         }
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
@@ -54,7 +54,7 @@ public class FlatButton: NSButton {
         setup()
     }
     
-    func setup() {
+    internal func setup() {
         wantsLayer = true
         layer?.cornerRadius = 4
         layer?.borderWidth = 1
@@ -69,13 +69,13 @@ public class FlatButton: NSButton {
         layer?.addSublayer(titleLayer)
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         let trackingArea = NSTrackingArea(rect: bounds, options: [.ActiveAlways, .MouseEnteredAndExited], owner: self, userInfo: nil)
         addTrackingArea(trackingArea)
     }
     
-    func animateColor(isOn: Bool) {
+    public func animateColor(isOn: Bool) {
         layer?.removeAllAnimations()
         titleLayer.removeAllAnimations()
         let duration = isOn ? 0.01 : 0.1
@@ -108,7 +108,7 @@ public class FlatButton: NSButton {
         }
     }
     
-    func setOn(isOn: Bool) {
+    public func setOn(isOn: Bool) {
         let nextState = isOn ? NSOnState : NSOffState
         if nextState != state {
             state = nextState
@@ -116,7 +116,7 @@ public class FlatButton: NSButton {
         }
     }
     
-    override func mouseDown(event: NSEvent) {
+    override public func mouseDown(event: NSEvent) {
         if !enabled {
             return
         }
@@ -124,20 +124,20 @@ public class FlatButton: NSButton {
         setOn(state == NSOnState ? false : true)
     }
     
-    override func mouseEntered(event: NSEvent) {
+    override public func mouseEntered(event: NSEvent) {
         if mouseDown {
             setOn(state == NSOnState ? false : true)
         }
     }
     
-    override func mouseExited(event: NSEvent) {
+    override public func mouseExited(event: NSEvent) {
         if mouseDown {
             setOn(state == NSOnState ? false : true)
             mouseDown = false
         }
     }
     
-    override func mouseUp(event: NSEvent) {
+    override public func mouseUp(event: NSEvent) {
         if mouseDown {
             if momentary {
                 setOn(state == NSOnState ? false : true)
@@ -147,18 +147,18 @@ public class FlatButton: NSButton {
         }
     }
     
-    private func tintColor(color: NSColor) -> NSColor {
+    internal func tintColor(color: NSColor) -> NSColor {
         var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
         let rgbColor = color.colorUsingColorSpaceName(NSCalibratedRGBColorSpace)
         rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         return NSColor(hue: h, saturation: s, brightness: b == 0 ? 0.2 : b * 0.8, alpha: a)
     }
     
-    override func layer(layer: CALayer, shouldInheritContentsScale newScale: CGFloat, fromWindow window: NSWindow) -> Bool {
+    override public func layer(layer: CALayer, shouldInheritContentsScale newScale: CGFloat, fromWindow window: NSWindow) -> Bool {
         return true
     }
     
-    override func drawRect(dirtyRect: NSRect) {
+    override public func drawRect(dirtyRect: NSRect) {
         
     }
     
