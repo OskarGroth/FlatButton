@@ -1,8 +1,8 @@
 FlatButton
 ==================
-Layer based NSButton with Interface Builder exposed style options.
+Layer based `NSButton` with Interface Builder exposed style options.
 
-This is a subclass that lets you create beautiful `NSButtons` easily.
+This is a subclass that lets you create beautiful `NSButton`s easily.
 
 <img src="https://s3.amazonaws.com/cindori/images/flatbutton.png" width="460">
 
