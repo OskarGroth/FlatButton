@@ -13,7 +13,7 @@ s.author            = {
 }
 s.source            = {
 :git => 'https://github.com/OskarGroth/FlatButton.git',
-:tag => "0.0.2"
+:tag => s.version.to_s
 }
 s.platform     = :osx, '10.9'
 s.source_files = 'FlatButton/FlatButton.{swift}'
