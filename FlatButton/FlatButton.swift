@@ -7,9 +7,9 @@
 //
 
 import Cocoa
-import CoreGraphics
+import QuartzCore
 
-class FlatButton: NSButton, CALayerDelegate {
+class FlatButton: NSButton {
     
     private var titleLayer = CATextLayer()
     private var mouseDown = Bool()
@@ -22,17 +22,17 @@ class FlatButton: NSButton, CALayerDelegate {
             layer?.cornerRadius = cornerRadius
         }
     }
-    @IBInspectable var color: NSColor = NSColor.blue {
+    @IBInspectable var color: NSColor = NSColor.blueColor() {
         didSet {
-            alternateColor = tintColor(color: color)
+            alternateColor = tintColor(color)
             if fill {
-                layer?.backgroundColor = color.cgColor
-                layer?.borderColor = NSColor.clear.cgColor
+                layer?.backgroundColor = color.CGColor
+                layer?.borderColor = NSColor.clearColor().CGColor
             } else {
-                titleLayer.foregroundColor = color.cgColor
-                layer?.borderColor = color.cgColor
+                titleLayer.foregroundColor = color.CGColor
+                layer?.borderColor = color.CGColor
             }
-            animateColor(isOn: state == NSOnState)
+            animateColor(state == NSOnState)
         }
     }
     
@@ -53,7 +53,7 @@ class FlatButton: NSButton, CALayerDelegate {
         layer?.delegate = self
         titleLayer.delegate = self
         let attributes = [NSFontAttributeName: font!]
-        let size = title.size(withAttributes: attributes)
+        let size = (title as NSString).sizeWithAttributes(attributes)
         titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
         titleLayer.string = title
         titleLayer.font = font
@@ -63,7 +63,7 @@ class FlatButton: NSButton, CALayerDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let trackingArea = NSTrackingArea(rect: bounds, options: [.activeAlways, .mouseEnteredAndExited], owner: self, userInfo: nil)
+        let trackingArea = NSTrackingArea(rect: bounds, options: [.ActiveAlways, .MouseEnteredAndExited], owner: self, userInfo: nil)
         addTrackingArea(trackingArea)
     }
     
@@ -72,30 +72,30 @@ class FlatButton: NSButton, CALayerDelegate {
         titleLayer.removeAllAnimations()
         let duration = isOn ? 0.01 : 0.1
         
-        var bgColor = (fill || isOn) ? color.cgColor : NSColor.clear.cgColor
+        var bgColor = (fill || isOn) ? color.CGColor : NSColor.clearColor().CGColor
         if fill && isOn {
-            bgColor = alternateColor.cgColor
+            bgColor = alternateColor.CGColor
             
         }
-        if layer?.backgroundColor != bgColor {
+        if !CGColorEqualToColor(layer?.backgroundColor, bgColor) {
             let animation = CABasicAnimation(keyPath: "backgroundColor")
             animation.toValue = bgColor
             animation.fromValue = layer?.backgroundColor
             animation.duration = duration
-            animation.isRemovedOnCompletion = false
+            animation.removedOnCompletion = false
             animation.fillMode = kCAFillModeForwards
-            layer?.add(animation, forKey: "ColorAnimation")
+            layer?.addAnimation(animation, forKey: "ColorAnimation")
             layer?.backgroundColor = (animation.toValue as! CGColor?)
         }
-        let titleColor = fill || isOn ? NSColor.white.cgColor : color.cgColor
-        if titleLayer.foregroundColor != titleColor {
+        let titleColor = fill || isOn ? NSColor.whiteColor().CGColor : color.CGColor
+        if !CGColorEqualToColor(titleLayer.foregroundColor, titleColor) {
             let animation = CABasicAnimation(keyPath: "foregroundColor")
             animation.toValue = titleColor
             animation.fromValue = titleLayer.foregroundColor
             animation.duration = duration
-            animation.isRemovedOnCompletion = false
+            animation.removedOnCompletion = false
             animation.fillMode = kCAFillModeForwards
-            titleLayer.add(animation, forKey: "titleAnimation")
+            titleLayer.addAnimation(animation, forKey: "titleAnimation")
             titleLayer.foregroundColor = (animation.toValue as! CGColor?)
         }
     }
@@ -104,54 +104,54 @@ class FlatButton: NSButton, CALayerDelegate {
         let nextState = isOn ? NSOnState : NSOffState
         if nextState != state {
             state = nextState
-            animateColor(isOn: state == NSOnState)
+            animateColor(state == NSOnState)
         }
     }
     
-    override func mouseDown(with event: NSEvent) {
-        if !isEnabled {
+    override func mouseDown(event: NSEvent) {
+        if !enabled {
             return
         }
         mouseDown = true
-        setOn(isOn: state == NSOnState ? false : true)
+        setOn(state == NSOnState ? false : true)
     }
     
-    override func mouseEntered(with event: NSEvent) {
+    override func mouseEntered(event: NSEvent) {
         if mouseDown {
-            setOn(isOn: state == NSOnState ? false : true)
+            setOn(state == NSOnState ? false : true)
         }
     }
     
-    override func mouseExited(with event: NSEvent) {
+    override func mouseExited(event: NSEvent) {
         if mouseDown {
-            setOn(isOn: state == NSOnState ? false : true)
+            setOn(state == NSOnState ? false : true)
             mouseDown = false
         }
     }
     
-    override func mouseUp(with event: NSEvent) {
+    override func mouseUp(event: NSEvent) {
         if mouseDown {
             if momentary {
-                setOn(isOn: state == NSOnState ? false : true)
+                setOn(state == NSOnState ? false : true)
             }
-            _ = target?.perform(action, with: self)
+            target?.performSelector(action)
             mouseDown = false
         }
     }
     
     private func tintColor(color: NSColor) -> NSColor {
         var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
-        let rgbColor = color.usingColorSpaceName(NSCalibratedRGBColorSpace)
+        let rgbColor = color.colorUsingColorSpaceName(NSCalibratedRGBColorSpace)
         rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         return NSColor(hue: h, saturation: s, brightness: b == 0 ? 0.2 : b * 0.8, alpha: a)
     }
     
-    override func layer(_ layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool {
+    override func layer(layer: CALayer, shouldInheritContentsScale newScale: CGFloat, fromWindow window: NSWindow) -> Bool {
         return true
     }
-
-    override func draw(_ dirtyRect: NSRect) {
-        // Nothing here
+    
+    override func drawRect(dirtyRect: NSRect) {
+        
     }
     
 }
