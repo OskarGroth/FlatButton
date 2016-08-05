@@ -34,7 +34,7 @@
 		75935E211D534A1A0069AF86 = {
 			isa = PBXGroup;
 			children = (
-				75935E2C1D534A1A0069AF86 /* FlatButton-macOS */,
+				75935E2C1D534A1A0069AF86 /* FlatButton */,
 				75935E2B1D534A1A0069AF86 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,7 +47,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		75935E2C1D534A1A0069AF86 /* FlatButton-macOS */ = {
+		75935E2C1D534A1A0069AF86 /* FlatButton */ = {
 			isa = PBXGroup;
 			children = (
 				75935E2D1D534A1A0069AF86 /* AppDelegate.swift */,
@@ -55,7 +55,6 @@
 				75935E311D534A1A0069AF86 /* MainMenu.xib */,
 				75935E341D534A1A0069AF86 /* Info.plist */,
 			);
-			name = "FlatButton-macOS";
 			path = FlatButton;
 			sourceTree = "<group>";
 		};

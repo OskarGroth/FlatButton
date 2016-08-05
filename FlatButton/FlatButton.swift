@@ -15,8 +15,16 @@ class FlatButton: NSButton {
     private var mouseDown = Bool()
     private var alternateColor = NSColor()
     
-    @IBInspectable var fill: Bool = false
-    @IBInspectable var momentary: Bool = false
+    @IBInspectable var fill: Bool = false {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable var momentary: Bool = true {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
     @IBInspectable var cornerRadius: CGFloat = 4 {
         didSet {
             layer?.cornerRadius = cornerRadius
