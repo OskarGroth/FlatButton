@@ -92,6 +92,7 @@
 					75935E291D534A1A0069AF86 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = ZQK6SX26CE;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};

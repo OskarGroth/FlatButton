@@ -7,32 +7,37 @@
 //
 
 import Cocoa
-import CoreGraphics
+import QuartzCore
 
 public class FlatButton: NSButton, CALayerDelegate {
     
     internal var titleLayer = CATextLayer()
     internal var mouseDown = Bool()
-    
-    public  var alternateColor = NSColor()
-    @IBInspectable public var fill: Bool = false
-    @IBInspectable public var momentary: Bool = false
+    public var alternateColor = NSColor()
+    @IBInspectable public var fill: Bool = false {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var momentary: Bool = true {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
     @IBInspectable public var cornerRadius: CGFloat = 4 {
         didSet {
             layer?.cornerRadius = cornerRadius
         }
     }
+    @IBInspectable public var borderWidth: CGFloat = 1 {
+        didSet {
+            layer?.borderWidth = borderWidth
+        }
+    }
     @IBInspectable public var color: NSColor = NSColor.blue {
         didSet {
-            alternateColor = tintColor(color: color)
-            if fill {
-                layer?.backgroundColor = color.cgColor
-                layer?.borderColor = NSColor.clear.cgColor
-            } else {
-                titleLayer.foregroundColor = color.cgColor
-                layer?.borderColor = color.cgColor
-            }
-            animateColor(isOn: state == NSOnState)
+            alternateColor = tintColor(color)
+            animateColor(state == NSOnState)
         }
     }
     
@@ -41,19 +46,20 @@ public class FlatButton: NSButton, CALayerDelegate {
         setup()
     }
     
-    override public init(frame: NSRect) {
+    override init(frame: NSRect) {
         super.init(frame: frame)
         setup()
     }
     
     internal func setup() {
         wantsLayer = true
+        layer?.masksToBounds = true
         layer?.cornerRadius = 4
         layer?.borderWidth = 1
         layer?.delegate = self
         titleLayer.delegate = self
         let attributes = [NSFontAttributeName: font!]
-        let size = title.size(withAttributes: attributes)
+        let size = (title as NSString).size(withAttributes: attributes)
         titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
         titleLayer.string = title
         titleLayer.font = font
@@ -67,15 +73,13 @@ public class FlatButton: NSButton, CALayerDelegate {
         addTrackingArea(trackingArea)
     }
     
-    public func animateColor(isOn: Bool) {
+    public func animateColor(_ isOn: Bool) {
         layer?.removeAllAnimations()
         titleLayer.removeAllAnimations()
         let duration = isOn ? 0.01 : 0.1
-        
-        var bgColor = (fill || isOn) ? color.cgColor : NSColor.clear.cgColor
+        var bgColor = fill || isOn ? color.cgColor : NSColor.clear.cgColor
         if fill && isOn {
             bgColor = alternateColor.cgColor
-            
         }
         if layer?.backgroundColor != bgColor {
             let animation = CABasicAnimation(keyPath: "backgroundColor")
@@ -98,13 +102,24 @@ public class FlatButton: NSButton, CALayerDelegate {
             titleLayer.add(animation, forKey: "titleAnimation")
             titleLayer.foregroundColor = (animation.toValue as! CGColor?)
         }
+        let borderColor = fill || isOn ? bgColor : color.cgColor
+        if layer?.borderColor != borderColor {
+            let animation = CABasicAnimation(keyPath: "borderColor")
+            animation.toValue = borderColor
+            animation.fromValue = layer?.borderColor
+            animation.duration = duration
+            animation.isRemovedOnCompletion = false
+            animation.fillMode = kCAFillModeForwards
+            layer?.add(animation, forKey: "borderAnimation")
+            layer?.borderColor = (animation.toValue as! CGColor?)
+        }
     }
     
-    public func setOn(isOn: Bool) {
+    public func setOn(_ isOn: Bool) {
         let nextState = isOn ? NSOnState : NSOffState
         if nextState != state {
             state = nextState
-            animateColor(isOn: state == NSOnState)
+            animateColor(state == NSOnState)
         }
     }
     
@@ -113,18 +128,18 @@ public class FlatButton: NSButton, CALayerDelegate {
             return
         }
         mouseDown = true
-        setOn(isOn: state == NSOnState ? false : true)
+        setOn(state == NSOnState ? false : true)
     }
     
     override public func mouseEntered(with event: NSEvent) {
         if mouseDown {
-            setOn(isOn: state == NSOnState ? false : true)
+            setOn(state == NSOnState ? false : true)
         }
     }
     
     override public func mouseExited(with event: NSEvent) {
         if mouseDown {
-            setOn(isOn: state == NSOnState ? false : true)
+            setOn(state == NSOnState ? false : true)
             mouseDown = false
         }
     }
@@ -132,14 +147,14 @@ public class FlatButton: NSButton, CALayerDelegate {
     override public func mouseUp(with event: NSEvent) {
         if mouseDown {
             if momentary {
-                setOn(isOn: state == NSOnState ? false : true)
+                setOn(state == NSOnState ? false : true)
             }
-            _ = target?.perform(action, with: self)
+            _ = target?.perform(action)
             mouseDown = false
         }
     }
     
-    internal func tintColor(color: NSColor) -> NSColor {
+    internal func tintColor(_ color: NSColor) -> NSColor {
         var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
         let rgbColor = color.usingColorSpaceName(NSCalibratedRGBColorSpace)
         rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
@@ -149,9 +164,9 @@ public class FlatButton: NSButton, CALayerDelegate {
     override public func layer(_ layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool {
         return true
     }
-
+    
     override public func draw(_ dirtyRect: NSRect) {
-        // Nothing here
+        
     }
     
 }
