@@ -29,6 +29,11 @@ public class FlatButton: NSButton {
             layer?.cornerRadius = cornerRadius
         }
     }
+    @IBInspectable public var borderWidth: CGFloat = 1 {
+        didSet {
+            layer?.borderWidth = borderWidth
+        }
+    }
     @IBInspectable public var color: NSColor = NSColor.blueColor() {
         didSet {
             alternateColor = tintColor(color)
