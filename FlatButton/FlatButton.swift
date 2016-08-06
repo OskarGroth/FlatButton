@@ -14,7 +14,6 @@ public class FlatButton: NSButton {
     internal var titleLayer = CATextLayer()
     internal var mouseDown = Bool()
     public var alternateColor = NSColor()
-    
     @IBInspectable public var fill: Bool = false {
         didSet {
             animateColor(state == NSOnState)
@@ -33,13 +32,6 @@ public class FlatButton: NSButton {
     @IBInspectable public var color: NSColor = NSColor.blueColor() {
         didSet {
             alternateColor = tintColor(color)
-            if fill {
-                layer?.backgroundColor = color.CGColor
-                layer?.borderColor = NSColor.clearColor().CGColor
-            } else {
-                titleLayer.foregroundColor = color.CGColor
-                layer?.borderColor = color.CGColor
-            }
             animateColor(state == NSOnState)
         }
     }
@@ -56,6 +48,7 @@ public class FlatButton: NSButton {
     
     internal func setup() {
         wantsLayer = true
+        layer?.masksToBounds = true
         layer?.cornerRadius = 4
         layer?.borderWidth = 1
         layer?.delegate = self
@@ -79,11 +72,9 @@ public class FlatButton: NSButton {
         layer?.removeAllAnimations()
         titleLayer.removeAllAnimations()
         let duration = isOn ? 0.01 : 0.1
-        
-        var bgColor = (fill || isOn) ? color.CGColor : NSColor.clearColor().CGColor
+        var bgColor = fill || isOn ? color.CGColor : NSColor.clearColor().CGColor
         if fill && isOn {
             bgColor = alternateColor.CGColor
-            
         }
         if !CGColorEqualToColor(layer?.backgroundColor, bgColor) {
             let animation = CABasicAnimation(keyPath: "backgroundColor")
@@ -105,6 +96,17 @@ public class FlatButton: NSButton {
             animation.fillMode = kCAFillModeForwards
             titleLayer.addAnimation(animation, forKey: "titleAnimation")
             titleLayer.foregroundColor = (animation.toValue as! CGColor?)
+        }
+        let borderColor = fill || isOn ? bgColor : color.CGColor
+        if !CGColorEqualToColor(layer?.borderColor, borderColor) {
+            let animation = CABasicAnimation(keyPath: "borderColor")
+            animation.toValue = borderColor
+            animation.fromValue = layer?.borderColor
+            animation.duration = duration
+            animation.removedOnCompletion = false
+            animation.fillMode = kCAFillModeForwards
+            layer?.addAnimation(animation, forKey: "borderAnimation")
+            layer?.borderColor = (animation.toValue as! CGColor?)
         }
     }
     
