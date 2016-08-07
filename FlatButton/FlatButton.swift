@@ -50,6 +50,11 @@ public class FlatButton: NSButton, CALayerDelegate {
             setupTitle()
         }
     }
+    override public var frame: NSRect {
+        didSet {
+            setupTitle()
+        }
+    }
     
     internal func setupTitle() {
         let attributes = [NSFontAttributeName: font!]
@@ -163,7 +168,7 @@ public class FlatButton: NSButton, CALayerDelegate {
             if momentary {
                 setOn(state == NSOnState ? false : true)
             }
-            _ = target?.perform(action)
+            _ = target?.perform(action, with: self)
             mouseDown = false
         }
     }
