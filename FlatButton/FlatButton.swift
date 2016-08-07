@@ -50,6 +50,11 @@ public class FlatButton: NSButton {
             setupTitle()
         }
     }
+    override public var frame: NSRect {
+        didSet {
+            setupTitle()
+        }
+    }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -163,7 +168,7 @@ public class FlatButton: NSButton {
             if momentary {
                 setOn(state == NSOnState ? false : true)
             }
-            target?.performSelector(action)
+            target?.performSelector(action, withObject: self)
             mouseDown = false
         }
     }
