@@ -165,11 +165,11 @@ public class FlatButton: NSButton {
     
     override public func mouseUp(event: NSEvent) {
         if mouseDown {
+            mouseDown = false
             if momentary {
                 setOn(state == NSOnState ? false : true)
             }
             target?.performSelector(action, withObject: self)
-            mouseDown = false
         }
     }
     
