@@ -40,6 +40,16 @@ public class FlatButton: NSButton {
             animateColor(state == NSOnState)
         }
     }
+    override public var title: String {
+        didSet {
+            setupTitle()
+        }
+    }
+    override public var font: NSFont? {
+        didSet {
+            setupTitle()
+        }
+    }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -51,6 +61,15 @@ public class FlatButton: NSButton {
         setup()
     }
     
+    internal func setupTitle() {
+        let attributes = [NSFontAttributeName: font!]
+        let size = (title as NSString).sizeWithAttributes(attributes)
+        titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
+        titleLayer.string = title
+        titleLayer.font = font
+        titleLayer.fontSize = font!.pointSize
+    }
+    
     internal func setup() {
         wantsLayer = true
         layer?.masksToBounds = true
@@ -58,13 +77,8 @@ public class FlatButton: NSButton {
         layer?.borderWidth = 1
         layer?.delegate = self
         titleLayer.delegate = self
-        let attributes = [NSFontAttributeName: font!]
-        let size = (title as NSString).sizeWithAttributes(attributes)
-        titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
-        titleLayer.string = title
-        titleLayer.font = font
-        titleLayer.fontSize = font!.pointSize
         layer?.addSublayer(titleLayer)
+        setupTitle()
     }
     
     override public func awakeFromNib() {
