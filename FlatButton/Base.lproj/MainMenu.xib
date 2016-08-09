@@ -760,7 +760,7 @@
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y60-JM-PDE" customClass="FlatButton" customModule="FlatButton" customModuleProvider="target">
                                 <rect key="frame" x="78" y="157" width="44" height="44"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cpg-Zy-Gd6">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="close" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="Cpg-Zy-Gd6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -772,6 +772,26 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="fill" value="NO"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aw2-h4-dxw" customClass="FlatButton" customModule="FlatButton" customModuleProvider="target">
+                                <rect key="frame" x="118" y="153" width="44" height="44"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="close" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="rrP-LB-BVv">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="fill" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
@@ -816,7 +836,7 @@
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pkv-Rd-KDa" customClass="FlatButton" customModule="FlatButton" customModuleProvider="target">
                                 <rect key="frame" x="78" y="157" width="44" height="44"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qyY-zW-QMy">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="close" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="qyY-zW-QMy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -935,4 +955,7 @@
             <point key="canvasLocation" x="56" y="333.5"/>
         </customView>
     </objects>
+    <resources>
+        <image name="close" width="26" height="26"/>
+    </resources>
 </document>

@@ -12,6 +12,7 @@ import QuartzCore
 public class FlatButton: NSButton {
     
     internal var titleLayer = CATextLayer()
+    internal var iconLayer = CAShapeLayer()
     internal var mouseDown = Bool()
     public var alternateColor = NSColor()
     @IBInspectable public var fill: Bool = false {
@@ -57,6 +58,11 @@ public class FlatButton: NSButton {
             setupTitle()
         }
     }
+    override public var image: NSImage? {
+        didSet {
+            setupImage()
+        }
+    }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -77,6 +83,19 @@ public class FlatButton: NSButton {
         titleLayer.fontSize = font!.pointSize
     }
     
+    internal func setupImage() {
+        if image != nil {
+            let maskLayer = CALayer()
+            let imageSize = image!.size
+            maskLayer.frame = CGRectMake(round((bounds.width-imageSize.width)/2), round((bounds.height-imageSize.height)/2), imageSize.width, imageSize.height)
+            var imageRect:CGRect = CGRectMake(0, 0, imageSize.width, imageSize.height)
+            let imageRef = image!.CGImageForProposedRect(&imageRect, context: nil, hints: nil)
+            maskLayer.contents = imageRef
+            iconLayer.frame = bounds
+            iconLayer.mask = maskLayer
+        }
+    }
+    
     internal func setup() {
         wantsLayer = true
         layer?.masksToBounds = true
@@ -85,7 +104,9 @@ public class FlatButton: NSButton {
         layer?.delegate = self
         titleLayer.delegate = self
         layer?.addSublayer(titleLayer)
+        layer?.addSublayer(iconLayer)
         setupTitle()
+        setupImage()
     }
     
     override public func awakeFromNib() {
@@ -98,7 +119,7 @@ public class FlatButton: NSButton {
         layer?.removeAllAnimations()
         titleLayer.removeAllAnimations()
         let duration = isOn ? 0.01 : 0.1
-        var bgColor = fill || isOn ? color.CGColor : NSColor.clearColor().CGColor
+        var bgColor = (fill || isOn) && borderWidth != 0 ? color.CGColor : NSColor.clearColor().CGColor
         if fill && isOn {
             bgColor = alternateColor.CGColor
         }
@@ -134,7 +155,18 @@ public class FlatButton: NSButton {
             layer?.addAnimation(animation, forKey: "borderAnimation")
             layer?.borderColor = (animation.toValue as! CGColor?)
         }
+        if !CGColorEqualToColor(iconLayer.backgroundColor, titleColor) {
+            let animation = CABasicAnimation(keyPath: "backgroundColor")
+            animation.toValue = titleColor
+            animation.fromValue = iconLayer.backgroundColor
+            animation.duration = duration
+            animation.removedOnCompletion = false
+            animation.fillMode = kCAFillModeForwards
+            iconLayer.addAnimation(animation, forKey: "iconAnimation")
+            iconLayer.backgroundColor = (animation.toValue as! CGColor?)
+        }
     }
+    
     
     public func setOn(isOn: Bool) {
         let nextState = isOn ? NSOnState : NSOffState
