@@ -9,8 +9,24 @@
 import Cocoa
 import QuartzCore
 
+internal extension CALayer {
+    internal func animate(color: CGColor, keyPath: String, duration: Double) {
+        if value(forKey: keyPath) as! CGColor? != color {
+            let animation = CABasicAnimation(keyPath: keyPath)
+            animation.toValue = color
+            animation.fromValue = value(forKey: keyPath)
+            animation.duration = duration
+            animation.isRemovedOnCompletion = false
+            animation.fillMode = kCAFillModeForwards
+            add(animation, forKey: "ColorAnimation")
+            setValue(color, forKey: keyPath)
+        }
+    }
+}
+
 public class FlatButton: NSButton, CALayerDelegate {
     
+    internal var iconLayer = CAShapeLayer()
     internal var titleLayer = CATextLayer()
     internal var mouseDown = Bool()
     public var alternateColor = NSColor()
@@ -55,6 +71,11 @@ public class FlatButton: NSButton, CALayerDelegate {
             setupTitle()
         }
     }
+    override public var image: NSImage? {
+        didSet {
+            setupImage()
+        }
+    }
     
     internal func setupTitle() {
         let attributes = [NSFontAttributeName: font!]
@@ -63,6 +84,19 @@ public class FlatButton: NSButton, CALayerDelegate {
         titleLayer.string = title
         titleLayer.font = font
         titleLayer.fontSize = font!.pointSize
+    }
+    
+    internal func setupImage() {
+        if image != nil {
+            let maskLayer = CALayer()
+            let imageSize = image!.size
+            maskLayer.frame = NSMakeRect(round((bounds.width-imageSize.width)/2), round((bounds.height-imageSize.height)/2), imageSize.width, imageSize.height)
+            var imageRect:CGRect = NSMakeRect(0, 0, imageSize.width, imageSize.height)
+            let imageRef = image!.cgImage(forProposedRect: &imageRect, context: nil, hints: nil)
+            maskLayer.contents = imageRef
+            iconLayer.frame = bounds
+            iconLayer.mask = maskLayer
+        }
     }
     
     required public init?(coder: NSCoder) {
@@ -82,8 +116,11 @@ public class FlatButton: NSButton, CALayerDelegate {
         layer?.borderWidth = 1
         layer?.delegate = self
         titleLayer.delegate = self
+        iconLayer.delegate = self
         layer?.addSublayer(titleLayer)
+        layer?.addSublayer(iconLayer)
         setupTitle()
+        setupImage()
     }
     
     override public func awakeFromNib() {
@@ -92,46 +129,26 @@ public class FlatButton: NSButton, CALayerDelegate {
         addTrackingArea(trackingArea)
     }
     
-    public func animateColor(_ isOn: Bool) {
+    internal func removeAnimations() {
         layer?.removeAllAnimations()
-        titleLayer.removeAllAnimations()
+        for subLayer in (layer?.sublayers)! {
+            subLayer.removeAllAnimations()
+        }
+    }
+    
+    public func animateColor(_ isOn: Bool) {
+        removeAnimations()
         let duration = isOn ? 0.01 : 0.1
-        var bgColor = fill || isOn ? color.cgColor : NSColor.clear.cgColor
+        var bgColor = (fill || isOn) && borderWidth != 0 ? color : NSColor.clear
         if fill && isOn {
-            bgColor = alternateColor.cgColor
+            bgColor = alternateColor
         }
-        if layer?.backgroundColor != bgColor {
-            let animation = CABasicAnimation(keyPath: "backgroundColor")
-            animation.toValue = bgColor
-            animation.fromValue = layer?.backgroundColor
-            animation.duration = duration
-            animation.isRemovedOnCompletion = false
-            animation.fillMode = kCAFillModeForwards
-            layer?.add(animation, forKey: "ColorAnimation")
-            layer?.backgroundColor = (animation.toValue as! CGColor?)
-        }
-        let titleColor = fill || isOn ? NSColor.white.cgColor : color.cgColor
-        if titleLayer.foregroundColor != titleColor {
-            let animation = CABasicAnimation(keyPath: "foregroundColor")
-            animation.toValue = titleColor
-            animation.fromValue = titleLayer.foregroundColor
-            animation.duration = duration
-            animation.isRemovedOnCompletion = false
-            animation.fillMode = kCAFillModeForwards
-            titleLayer.add(animation, forKey: "titleAnimation")
-            titleLayer.foregroundColor = (animation.toValue as! CGColor?)
-        }
-        let borderColor = fill || isOn ? bgColor : color.cgColor
-        if layer?.borderColor != borderColor {
-            let animation = CABasicAnimation(keyPath: "borderColor")
-            animation.toValue = borderColor
-            animation.fromValue = layer?.borderColor
-            animation.duration = duration
-            animation.isRemovedOnCompletion = false
-            animation.fillMode = kCAFillModeForwards
-            layer?.add(animation, forKey: "borderAnimation")
-            layer?.borderColor = (animation.toValue as! CGColor?)
-        }
+        let titleColor = fill || isOn ? NSColor.white : color
+        let borderColor = fill || isOn ? bgColor : color
+        layer?.animate(color: bgColor.cgColor, keyPath: "backgroundColor", duration: duration)
+        layer?.animate(color: borderColor.cgColor, keyPath: "borderColor", duration: duration)
+        titleLayer.animate(color: titleColor.cgColor, keyPath: "foregroundColor", duration: duration)
+        iconLayer.animate(color: titleColor.cgColor, keyPath: "backgroundColor", duration: duration)
     }
     
     public func setOn(_ isOn: Bool) {
