@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        window.backgroundColor = NSColor.white
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

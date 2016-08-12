@@ -24,6 +24,15 @@ internal extension CALayer {
     }
 }
 
+internal extension NSColor {
+    internal func tintedColor() -> NSColor {
+        var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
+        let rgbColor = usingColorSpaceName(NSCalibratedRGBColorSpace)
+        rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return NSColor(hue: h, saturation: s, brightness: b == 0 ? 0.2 : b * 0.8, alpha: a)
+    }
+}
+
 public class FlatButton: NSButton, CALayerDelegate {
     
     internal var iconLayer = CAShapeLayer()
@@ -52,7 +61,7 @@ public class FlatButton: NSButton, CALayerDelegate {
     }
     @IBInspectable public var color: NSColor = NSColor.blue {
         didSet {
-            alternateColor = tintColor(color)
+            alternateColor = color.tintedColor()
             animateColor(state == NSOnState)
         }
     }
@@ -77,27 +86,7 @@ public class FlatButton: NSButton, CALayerDelegate {
         }
     }
     
-    internal func setupTitle() {
-        let attributes = [NSFontAttributeName: font!]
-        let size = (title as NSString).size(withAttributes: attributes)
-        titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
-        titleLayer.string = title
-        titleLayer.font = font
-        titleLayer.fontSize = font!.pointSize
-    }
-    
-    internal func setupImage() {
-        if image != nil {
-            let maskLayer = CALayer()
-            let imageSize = image!.size
-            maskLayer.frame = NSMakeRect(round((bounds.width-imageSize.width)/2), round((bounds.height-imageSize.height)/2), imageSize.width, imageSize.height)
-            var imageRect:CGRect = NSMakeRect(0, 0, imageSize.width, imageSize.height)
-            let imageRef = image!.cgImage(forProposedRect: &imageRect, context: nil, hints: nil)
-            maskLayer.contents = imageRef
-            iconLayer.frame = bounds
-            iconLayer.mask = maskLayer
-        }
-    }
+    // MARK: Setup & Initialization
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -123,12 +112,36 @@ public class FlatButton: NSButton, CALayerDelegate {
         setupImage()
     }
     
+    internal func setupTitle() {
+        let attributes = [NSFontAttributeName: font!]
+        let size = (title as NSString).size(withAttributes: attributes)
+        titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
+        titleLayer.string = title
+        titleLayer.font = font
+        titleLayer.fontSize = font!.pointSize
+    }
+    
+    internal func setupImage() {
+        if image != nil {
+            let maskLayer = CALayer()
+            let imageSize = image!.size
+            maskLayer.frame = NSMakeRect(round((bounds.width-imageSize.width)/2), round((bounds.height-imageSize.height)/2), imageSize.width, imageSize.height)
+            var imageRect:CGRect = NSMakeRect(0, 0, imageSize.width, imageSize.height)
+            let imageRef = image!.cgImage(forProposedRect: &imageRect, context: nil, hints: nil)
+            maskLayer.contents = imageRef
+            iconLayer.frame = bounds
+            iconLayer.mask = maskLayer
+        }
+    }
+    
     override public func awakeFromNib() {
         super.awakeFromNib()
         let trackingArea = NSTrackingArea(rect: bounds, options: [.activeAlways, .mouseEnteredAndExited], owner: self, userInfo: nil)
         addTrackingArea(trackingArea)
     }
     
+    // MARK: Animations
+
     internal func removeAnimations() {
         layer?.removeAllAnimations()
         for subLayer in (layer?.sublayers)! {
@@ -151,6 +164,8 @@ public class FlatButton: NSButton, CALayerDelegate {
         iconLayer.animate(color: titleColor.cgColor, keyPath: "backgroundColor", duration: duration)
     }
     
+    // MARK: Interaction
+    
     public func setOn(_ isOn: Bool) {
         let nextState = isOn ? NSOnState : NSOffState
         if nextState != state {
@@ -160,11 +175,10 @@ public class FlatButton: NSButton, CALayerDelegate {
     }
     
     override public func mouseDown(with event: NSEvent) {
-        if !isEnabled {
-            return
+        if isEnabled {
+            mouseDown = true
+            setOn(state == NSOnState ? false : true)
         }
-        mouseDown = true
-        setOn(state == NSOnState ? false : true)
     }
     
     override public func mouseEntered(with event: NSEvent) {
@@ -190,12 +204,7 @@ public class FlatButton: NSButton, CALayerDelegate {
         }
     }
     
-    internal func tintColor(_ color: NSColor) -> NSColor {
-        var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
-        let rgbColor = color.usingColorSpaceName(NSCalibratedRGBColorSpace)
-        rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return NSColor(hue: h, saturation: s, brightness: b == 0 ? 0.2 : b * 0.8, alpha: a)
-    }
+    // MARK: Drawing
     
     override public func layer(_ layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool {
         return true
