@@ -174,11 +174,12 @@ public class FlatButton: NSButton, CALayerDelegate {
         let duration = isOn ? onAnimationDuration : offAnimationDuration
         let bgColor = isOn ? highlightButtonColor : buttonColor
         let titleColor = isOn ? highlightTextColor : textColor
+        let imageColor = isOn ? highlightIconColor : iconColor
         let borderColor = bgColor
         layer?.animate(color: bgColor.cgColor, keyPath: "backgroundColor", duration: duration)
         layer?.animate(color: borderColor.cgColor, keyPath: "borderColor", duration: duration)
         titleLayer.animate(color: titleColor.cgColor, keyPath: "foregroundColor", duration: duration)
-        iconLayer.animate(color: titleColor.cgColor, keyPath: "backgroundColor", duration: duration)
+        iconLayer.animate(color: imageColor.cgColor, keyPath: "backgroundColor", duration: duration)
     }
     
     // MARK: Interaction
