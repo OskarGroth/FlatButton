@@ -18,7 +18,7 @@ internal extension CALayer {
             animation.duration = duration
             animation.isRemovedOnCompletion = false
             animation.fillMode = kCAFillModeForwards
-            add(animation, forKey: "ColorAnimation")
+            add(animation, forKey: keyPath)
             setValue(color, forKey: keyPath)
         }
     }
@@ -38,17 +38,13 @@ public class FlatButton: NSButton, CALayerDelegate {
     internal var iconLayer = CAShapeLayer()
     internal var titleLayer = CATextLayer()
     internal var mouseDown = Bool()
-    public var alternateColor = NSColor()
-    @IBInspectable public var fill: Bool = false {
-        didSet {
-            animateColor(state == NSOnState)
-        }
-    }
     @IBInspectable public var momentary: Bool = true {
         didSet {
             animateColor(state == NSOnState)
         }
     }
+    @IBInspectable public var onAnimationDuration: Double = 0.01
+    @IBInspectable public var offAnimationDuration: Double = 0.1
     @IBInspectable public var cornerRadius: CGFloat = 4 {
         didSet {
             layer?.cornerRadius = cornerRadius
@@ -59,9 +55,33 @@ public class FlatButton: NSButton, CALayerDelegate {
             layer?.borderWidth = borderWidth
         }
     }
-    @IBInspectable public var color: NSColor = NSColor.blue {
+    @IBInspectable public var buttonColor: NSColor = NSColor.darkGray {
         didSet {
-            alternateColor = color.tintedColor()
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var highlightButtonColor: NSColor = NSColor.white {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var iconColor: NSColor = NSColor.gray {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var highlightIconColor: NSColor = NSColor.black {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var textColor: NSColor = NSColor.gray {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var highlightTextColor: NSColor = NSColor.gray {
+        didSet {
             animateColor(state == NSOnState)
         }
     }
@@ -151,13 +171,10 @@ public class FlatButton: NSButton, CALayerDelegate {
     
     public func animateColor(_ isOn: Bool) {
         removeAnimations()
-        let duration = isOn ? 0.01 : 0.1
-        var bgColor = (fill || isOn) && borderWidth != 0 ? color : NSColor.clear
-        if fill && isOn {
-            bgColor = alternateColor
-        }
-        let titleColor = fill || isOn ? NSColor.white : color
-        let borderColor = fill || isOn ? bgColor : color
+        let duration = isOn ? onAnimationDuration : offAnimationDuration
+        let bgColor = isOn ? highlightButtonColor : buttonColor
+        let titleColor = isOn ? highlightTextColor : textColor
+        let borderColor = bgColor
         layer?.animate(color: bgColor.cgColor, keyPath: "backgroundColor", duration: duration)
         layer?.animate(color: borderColor.cgColor, keyPath: "borderColor", duration: duration)
         titleLayer.animate(color: titleColor.cgColor, keyPath: "foregroundColor", duration: duration)
