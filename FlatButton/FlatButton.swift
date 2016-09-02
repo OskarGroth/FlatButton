@@ -9,22 +9,42 @@
 import Cocoa
 import QuartzCore
 
-public class FlatButton: NSButton {
-    
-    internal var titleLayer = CATextLayer()
-    internal var iconLayer = CAShapeLayer()
-    internal var mouseDown = Bool()
-    public var alternateColor = NSColor()
-    @IBInspectable public var fill: Bool = false {
-        didSet {
-            animateColor(state == NSOnState)
+internal extension CALayer {
+    internal func animateColor(color: CGColor, keyPath: String, duration: Double) {
+        if !CGColorEqualToColor(valueForKey(keyPath) as! CGColor?, color) {
+            let animation = CABasicAnimation(keyPath: keyPath)
+            animation.toValue = color
+            animation.fromValue = valueForKey(keyPath)
+            animation.duration = duration
+            animation.removedOnCompletion = false
+            animation.fillMode = kCAFillModeForwards
+            addAnimation(animation, forKey: keyPath)
+            setValue(color, forKey: keyPath)
         }
     }
+}
+
+internal extension NSColor {
+    internal func tintedColor() -> NSColor {
+        var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
+        let rgbColor = colorUsingColorSpaceName(NSCalibratedRGBColorSpace)
+        rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return NSColor(hue: h, saturation: s, brightness: b == 0 ? 0.2 : b * 0.8, alpha: a)
+    }
+}
+
+public class FlatButton: NSButton {
+    
+    internal var iconLayer = CAShapeLayer()
+    internal var titleLayer = CATextLayer()
+    internal var mouseDown = Bool()
     @IBInspectable public var momentary: Bool = true {
         didSet {
             animateColor(state == NSOnState)
         }
     }
+    @IBInspectable public var onAnimationDuration: Double = 0.01
+    @IBInspectable public var offAnimationDuration: Double = 0.1
     @IBInspectable public var cornerRadius: CGFloat = 4 {
         didSet {
             layer?.cornerRadius = cornerRadius
@@ -35,14 +55,36 @@ public class FlatButton: NSButton {
             layer?.borderWidth = borderWidth
         }
     }
-    @IBInspectable public var color: NSColor = NSColor.blueColor() {
+    @IBInspectable public var buttonColor: NSColor = NSColor.darkGrayColor() {
         didSet {
-            alternateColor = tintColor(color)
             animateColor(state == NSOnState)
         }
     }
-    @IBInspectable public var activeTitleColor : NSColor = NSColor.whiteColor()
-    
+    @IBInspectable public var activeButtonColor: NSColor = NSColor.whiteColor() {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var iconColor: NSColor = NSColor.grayColor() {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var activeIconColor: NSColor = NSColor.blackColor() {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var textColor: NSColor = NSColor.grayColor() {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var activeTextColor: NSColor = NSColor.grayColor() {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
     override public var title: String {
         didSet {
             setupTitle()
@@ -64,6 +106,8 @@ public class FlatButton: NSButton {
         }
     }
     
+    // MARK: Setup & Initialization
+    
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
@@ -72,6 +116,20 @@ public class FlatButton: NSButton {
     override init(frame: NSRect) {
         super.init(frame: frame)
         setup()
+    }
+    
+    internal func setup() {
+        wantsLayer = true
+        layer?.masksToBounds = true
+        layer?.cornerRadius = 4
+        layer?.borderWidth = 1
+        layer?.delegate = self
+        titleLayer.delegate = self
+        iconLayer.delegate = self
+        layer?.addSublayer(titleLayer)
+        layer?.addSublayer(iconLayer)
+        setupTitle()
+        setupImage()
     }
     
     internal func setupTitle() {
@@ -87,26 +145,13 @@ public class FlatButton: NSButton {
         if image != nil {
             let maskLayer = CALayer()
             let imageSize = image!.size
-            maskLayer.frame = CGRectMake(round((bounds.width-imageSize.width)/2), round((bounds.height-imageSize.height)/2), imageSize.width, imageSize.height)
-            var imageRect:CGRect = CGRectMake(0, 0, imageSize.width, imageSize.height)
+            maskLayer.frame = NSMakeRect(round((bounds.width-imageSize.width)/2), round((bounds.height-imageSize.height)/2), imageSize.width, imageSize.height)
+            var imageRect:CGRect = NSMakeRect(0, 0, imageSize.width, imageSize.height)
             let imageRef = image!.CGImageForProposedRect(&imageRect, context: nil, hints: nil)
             maskLayer.contents = imageRef
             iconLayer.frame = bounds
             iconLayer.mask = maskLayer
         }
-    }
-    
-    internal func setup() {
-        wantsLayer = true
-        layer?.masksToBounds = true
-        layer?.cornerRadius = 4
-        layer?.borderWidth = 1
-        layer?.delegate = self
-        titleLayer.delegate = self
-        layer?.addSublayer(titleLayer)
-        layer?.addSublayer(iconLayer)
-        setupTitle()
-        setupImage()
     }
     
     override public func awakeFromNib() {
@@ -115,58 +160,29 @@ public class FlatButton: NSButton {
         addTrackingArea(trackingArea)
     }
     
-    public func animateColor(isOn: Bool) {
+    // MARK: Animations
+    
+    internal func removeAnimations() {
         layer?.removeAllAnimations()
-        titleLayer.removeAllAnimations()
-        let duration = isOn ? 0.01 : 0.1
-        var bgColor = (fill || isOn) && borderWidth != 0 ? color.CGColor : NSColor.clearColor().CGColor
-        if fill && isOn {
-            bgColor = alternateColor.CGColor
-        }
-        if !CGColorEqualToColor(layer?.backgroundColor, bgColor) {
-            let animation = CABasicAnimation(keyPath: "backgroundColor")
-            animation.toValue = bgColor
-            animation.fromValue = layer?.backgroundColor
-            animation.duration = duration
-            animation.removedOnCompletion = false
-            animation.fillMode = kCAFillModeForwards
-            layer?.addAnimation(animation, forKey: "ColorAnimation")
-            layer?.backgroundColor = (animation.toValue as! CGColor?)
-        }
-        let titleColor = fill || isOn ? activeTitleColor.CGColor : color.CGColor
-        if !CGColorEqualToColor(titleLayer.foregroundColor, titleColor) {
-            let animation = CABasicAnimation(keyPath: "foregroundColor")
-            animation.toValue = titleColor
-            animation.fromValue = titleLayer.foregroundColor
-            animation.duration = duration
-            animation.removedOnCompletion = false
-            animation.fillMode = kCAFillModeForwards
-            titleLayer.addAnimation(animation, forKey: "titleAnimation")
-            titleLayer.foregroundColor = (animation.toValue as! CGColor?)
-        }
-        let borderColor = fill || isOn ? bgColor : color.CGColor
-        if !CGColorEqualToColor(layer?.borderColor, borderColor) {
-            let animation = CABasicAnimation(keyPath: "borderColor")
-            animation.toValue = borderColor
-            animation.fromValue = layer?.borderColor
-            animation.duration = duration
-            animation.removedOnCompletion = false
-            animation.fillMode = kCAFillModeForwards
-            layer?.addAnimation(animation, forKey: "borderAnimation")
-            layer?.borderColor = (animation.toValue as! CGColor?)
-        }
-        if !CGColorEqualToColor(iconLayer.backgroundColor, titleColor) {
-            let animation = CABasicAnimation(keyPath: "backgroundColor")
-            animation.toValue = titleColor
-            animation.fromValue = iconLayer.backgroundColor
-            animation.duration = duration
-            animation.removedOnCompletion = false
-            animation.fillMode = kCAFillModeForwards
-            iconLayer.addAnimation(animation, forKey: "iconAnimation")
-            iconLayer.backgroundColor = (animation.toValue as! CGColor?)
+        for subLayer in (layer?.sublayers)! {
+            subLayer.removeAllAnimations()
         }
     }
     
+    public func animateColor(isOn: Bool) {
+        removeAnimations()
+        let duration = isOn ? onAnimationDuration : offAnimationDuration
+        let bgColor = isOn ? activeButtonColor : buttonColor
+        let titleColor = isOn ? activeTextColor : textColor
+        let imageColor = isOn ? activeIconColor : iconColor
+        let borderColor = bgColor
+        layer?.animateColor(bgColor.CGColor, keyPath: "backgroundColor", duration: duration)
+        layer?.animateColor(borderColor.CGColor, keyPath: "borderColor", duration: duration)
+        titleLayer.animateColor(titleColor.CGColor, keyPath: "foregroundColor", duration: duration)
+        iconLayer.animateColor(imageColor.CGColor, keyPath: "backgroundColor", duration: duration)
+    }
+    
+    // MARK: Interaction
     
     public func setOn(isOn: Bool) {
         let nextState = isOn ? NSOnState : NSOffState
@@ -177,11 +193,10 @@ public class FlatButton: NSButton {
     }
     
     override public func mouseDown(event: NSEvent) {
-        if !enabled {
-            return
+        if enabled {
+            mouseDown = true
+            setOn(state == NSOnState ? false : true)
         }
-        mouseDown = true
-        setOn(state == NSOnState ? false : true)
     }
     
     override public func mouseEntered(event: NSEvent) {
@@ -207,12 +222,7 @@ public class FlatButton: NSButton {
         }
     }
     
-    internal func tintColor(color: NSColor) -> NSColor {
-        var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
-        let rgbColor = color.colorUsingColorSpaceName(NSCalibratedRGBColorSpace)
-        rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return NSColor(hue: h, saturation: s, brightness: b == 0 ? 0.2 : b * 0.8, alpha: a)
-    }
+    // MARK: Drawing
     
     override public func layer(layer: CALayer, shouldInheritContentsScale newScale: CGFloat, fromWindow window: NSWindow) -> Bool {
         return true
