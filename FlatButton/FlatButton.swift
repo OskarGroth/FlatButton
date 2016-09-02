@@ -40,6 +40,8 @@ public class FlatButton: NSButton {
             animateColor(state == NSOnState)
         }
     }
+    @IBInspectable public var activeTitleColor : NSColor = NSColor.whiteColor()
+    
     override public var title: String {
         didSet {
             setupTitle()
@@ -110,7 +112,7 @@ public class FlatButton: NSButton {
             layer?.addAnimation(animation, forKey: "ColorAnimation")
             layer?.backgroundColor = (animation.toValue as! CGColor?)
         }
-        let titleColor = fill || isOn ? NSColor.whiteColor().CGColor : color.CGColor
+        let titleColor = fill || isOn ? activeTitleColor.CGColor : color.CGColor
         if !CGColorEqualToColor(titleLayer.foregroundColor, titleColor) {
             let animation = CABasicAnimation(keyPath: "foregroundColor")
             animation.toValue = titleColor
