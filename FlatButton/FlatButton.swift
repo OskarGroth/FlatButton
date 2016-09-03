@@ -133,15 +133,14 @@ public class FlatButton: NSButton, CALayerDelegate {
     }
     
     internal func setupTitle() {
-        guard let string = title as NSString? else {
-            return
+        if title.characters.count > 0 {
+            let attributes = [NSFontAttributeName: font!]
+            let size = title.size(withAttributes: attributes)
+            titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
+            titleLayer.string = title
+            titleLayer.font = font
+            titleLayer.fontSize = font!.pointSize
         }
-        let attributes = [NSFontAttributeName: font!]
-        let size = string.size(withAttributes: attributes)
-        titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
-        titleLayer.string = title
-        titleLayer.font = font
-        titleLayer.fontSize = font!.pointSize
     }
     
     internal func setupImage() {
