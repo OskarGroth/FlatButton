@@ -166,8 +166,10 @@ public class FlatButton: NSButton {
     
     internal func removeAnimations() {
         layer?.removeAllAnimations()
-        for subLayer in (layer?.sublayers)! {
-            subLayer.removeAllAnimations()
+        if layer?.sublayers != nil {
+            for subLayer in (layer?.sublayers)! {
+                subLayer.removeAllAnimations()
+            }
         }
     }
     
