@@ -133,12 +133,14 @@ public class FlatButton: NSButton {
     }
     
     internal func setupTitle() {
-        let attributes = [NSFontAttributeName: font!]
-        let size = (title as NSString).sizeWithAttributes(attributes)
-        titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
-        titleLayer.string = title
-        titleLayer.font = font
-        titleLayer.fontSize = font!.pointSize
+        if title.characters.count > 0 {
+            let attributes = [NSFontAttributeName: font!]
+            let size = title.sizeWithAttributes(attributes)
+            titleLayer.frame = NSMakeRect(round((layer!.frame.width-size.width)/2), round((layer!.frame.height-size.height)/2), size.width, size.height)
+            titleLayer.string = title
+            titleLayer.font = font
+            titleLayer.fontSize = font!.pointSize
+        }
     }
     
     internal func setupImage() {
