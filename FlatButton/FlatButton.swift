@@ -24,6 +24,7 @@ internal extension CALayer {
     }
 }
 
+//unused for now
 internal extension NSColor {
     internal func tintedColor() -> NSColor {
         var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
@@ -163,7 +164,7 @@ public class FlatButton: NSButton, CALayerDelegate {
     
     override public func awakeFromNib() {
         super.awakeFromNib()
-        let trackingArea = NSTrackingArea(rect: bounds, options: [.activeAlways, .mouseEnteredAndExited], owner: self, userInfo: nil)
+        let trackingArea = NSTrackingArea(rect: bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil)
         addTrackingArea(trackingArea)
     }
     
