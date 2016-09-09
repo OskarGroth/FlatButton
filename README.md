@@ -2,27 +2,30 @@ FlatButton
 ==================
 Layer based NSButton with Interface Builder exposed style options.
 
-This is a subclass that lets you create beatiful NSButtons easily.
-Works great with `NSVisualEffectView`.
+This is a subclass that lets you create beautiful NSButton controls easily.
 
-![UIButton+Bootstrap](screen.png "Screenshot")
+![FlatButton for macOS](https://s3.amazonaws.com/cindori/images/flatbutton.png "FlatButton for macOS")
 
 ## Installation (CocoaPods)
 Configure your Podfile to use `FlatButton`:
 
 ```pod 'FlatButton'```
 
+Note that FlatButton is Swift 3 only.
+
 ## Usage
 
 Create an `NSButton` in Interface Builder and set it's class to `FlatButton`.
 You can now style your button from the inspector:
+
+![FlatButton for macOS](https://s3.amazonaws.com/cindori/images/inspector.png "FlatButton for macOS")
 
 The same values can be accessed from your code.
 
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2013 Oskar Groth
+Copyright (c) 2016 Oskar Groth
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
