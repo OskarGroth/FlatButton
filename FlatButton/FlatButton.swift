@@ -202,6 +202,10 @@ public class FlatButton: NSButton, CALayerDelegate {
         }
     }
     
+    override public func hitTest(_ point: NSPoint) -> NSView? {
+        return isEnabled ? super.hitTest(point) : nil
+    }
+    
     override public func mouseDown(with event: NSEvent) {
         if isEnabled {
             mouseDown = true
