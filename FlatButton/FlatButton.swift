@@ -106,6 +106,11 @@ public class FlatButton: NSButton, CALayerDelegate {
             setupImage()
         }
     }
+    override public var isEnabled: Bool {
+        didSet {
+            alphaValue = isEnabled ? 1 : 0.5
+        }
+    }
     
     // MARK: Setup & Initialization
     
