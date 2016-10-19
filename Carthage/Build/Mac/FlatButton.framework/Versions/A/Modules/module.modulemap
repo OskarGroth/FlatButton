@@ -1,0 +1,10 @@
+framework module FlatButton {
+  umbrella header "FlatButton.h"
+
+  export *
+  module * { export * }
+}
+
+module FlatButton.Swift {
+    header "FlatButton-Swift.h"
+}

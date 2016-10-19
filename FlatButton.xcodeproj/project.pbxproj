@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75670D831DB7A6BF00F6EA18 /* FlatButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 75670D811DB7A6BF00F6EA18 /* FlatButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75670D871DB7A6C900F6EA18 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
+		75670D881DB7A74800F6EA18 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75935E341D534A1A0069AF86 /* Info.plist */; };
+		75670D891DB7A74A00F6EA18 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75670D821DB7A6BF00F6EA18 /* Info.plist */; };
 		75820B261D5A5B2400B98872 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75820B251D5A5B2400B98872 /* close@2x.png */; };
 		75935E2E1D534A1A0069AF86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E2D1D534A1A0069AF86 /* AppDelegate.swift */; };
 		75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75935E311D534A1A0069AF86 /* MainMenu.xib */; };
@@ -14,8 +18,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		75670D7F1DB7A6BF00F6EA18 /* FlatButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FlatButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75670D811DB7A6BF00F6EA18 /* FlatButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlatButton.h; sourceTree = "<group>"; };
+		75670D821DB7A6BF00F6EA18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75820B251D5A5B2400B98872 /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
-		75935E2A1D534A1A0069AF86 /* FlatButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlatButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75935E2A1D534A1A0069AF86 /* FlatButton-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlatButton-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75935E2D1D534A1A0069AF86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75935E321D534A1A0069AF86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		75935E341D534A1A0069AF86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -23,6 +30,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		75670D7B1DB7A6BF00F6EA18 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75935E271D534A1A0069AF86 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,10 +47,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75670D801DB7A6BF00F6EA18 /* FlatButton */ = {
+			isa = PBXGroup;
+			children = (
+				75670D811DB7A6BF00F6EA18 /* FlatButton.h */,
+				75670D821DB7A6BF00F6EA18 /* Info.plist */,
+			);
+			path = FlatButton;
+			sourceTree = "<group>";
+		};
 		75935E211D534A1A0069AF86 = {
 			isa = PBXGroup;
 			children = (
 				75935E2C1D534A1A0069AF86 /* FlatButton-macOS */,
+				75670D801DB7A6BF00F6EA18 /* FlatButton */,
 				75935E2B1D534A1A0069AF86 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,7 +68,8 @@
 		75935E2B1D534A1A0069AF86 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				75935E2A1D534A1A0069AF86 /* FlatButton.app */,
+				75935E2A1D534A1A0069AF86 /* FlatButton-Example.app */,
+				75670D7F1DB7A6BF00F6EA18 /* FlatButton.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,10 +89,39 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		75670D7C1DB7A6BF00F6EA18 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75670D831DB7A6BF00F6EA18 /* FlatButton.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		75935E291D534A1A0069AF86 /* FlatButton */ = {
+		75670D7E1DB7A6BF00F6EA18 /* FlatButton */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 75935E371D534A1A0069AF86 /* Build configuration list for PBXNativeTarget "FlatButton" */;
+			buildConfigurationList = 75670D841DB7A6BF00F6EA18 /* Build configuration list for PBXNativeTarget "FlatButton" */;
+			buildPhases = (
+				75670D7A1DB7A6BF00F6EA18 /* Sources */,
+				75670D7B1DB7A6BF00F6EA18 /* Frameworks */,
+				75670D7C1DB7A6BF00F6EA18 /* Headers */,
+				75670D7D1DB7A6BF00F6EA18 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FlatButton;
+			productName = FlatButton;
+			productReference = 75670D7F1DB7A6BF00F6EA18 /* FlatButton.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		75935E291D534A1A0069AF86 /* FlatButton-Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75935E371D534A1A0069AF86 /* Build configuration list for PBXNativeTarget "FlatButton-Example" */;
 			buildPhases = (
 				75935E261D534A1A0069AF86 /* Sources */,
 				75935E271D534A1A0069AF86 /* Frameworks */,
@@ -77,9 +131,9 @@
 			);
 			dependencies = (
 			);
-			name = FlatButton;
+			name = "FlatButton-Example";
 			productName = FlatButton;
-			productReference = 75935E2A1D534A1A0069AF86 /* FlatButton.app */;
+			productReference = 75935E2A1D534A1A0069AF86 /* FlatButton-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -92,6 +146,11 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Cindori;
 				TargetAttributes = {
+					75670D7E1DB7A6BF00F6EA18 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = ZQK6SX26CE;
+						ProvisioningStyle = Automatic;
+					};
 					75935E291D534A1A0069AF86 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = ZQK6SX26CE;
@@ -113,24 +172,42 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				75935E291D534A1A0069AF86 /* FlatButton */,
+				75935E291D534A1A0069AF86 /* FlatButton-Example */,
+				75670D7E1DB7A6BF00F6EA18 /* FlatButton */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		75670D7D1DB7A6BF00F6EA18 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75670D891DB7A74A00F6EA18 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75935E281D534A1A0069AF86 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */,
 				75820B261D5A5B2400B98872 /* close@2x.png in Resources */,
+				75670D881DB7A74800F6EA18 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		75670D7A1DB7A6BF00F6EA18 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75670D871DB7A6C900F6EA18 /* FlatButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75935E261D534A1A0069AF86 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +231,56 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		75670D851DB7A6BF00F6EA18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZQK6SX26CE;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = FlatButton/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.cindori.FlatButton;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		75670D861DB7A6BF00F6EA18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZQK6SX26CE;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = FlatButton/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.cindori.FlatButton;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		75935E351D534A1A0069AF86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -252,7 +379,7 @@
 				INFOPLIST_FILE = FlatButton/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = org.cindori.FlatButton;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cindori.FlatButton-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -266,7 +393,7 @@
 				INFOPLIST_FILE = FlatButton/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = org.cindori.FlatButton;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cindori.FlatButton-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -275,6 +402,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		75670D841DB7A6BF00F6EA18 /* Build configuration list for PBXNativeTarget "FlatButton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75670D851DB7A6BF00F6EA18 /* Debug */,
+				75670D861DB7A6BF00F6EA18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		75935E251D534A1A0069AF86 /* Build configuration list for PBXProject "FlatButton" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -284,7 +419,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75935E371D534A1A0069AF86 /* Build configuration list for PBXNativeTarget "FlatButton" */ = {
+		75935E371D534A1A0069AF86 /* Build configuration list for PBXNativeTarget "FlatButton-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75935E381D534A1A0069AF86 /* Debug */,
