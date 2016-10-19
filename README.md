@@ -1,5 +1,7 @@
 FlatButton
 ==================
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 Layer based NSButton with Interface Builder exposed style options.
 
 This is a subclass that lets you create beautiful NSButton controls easily.
