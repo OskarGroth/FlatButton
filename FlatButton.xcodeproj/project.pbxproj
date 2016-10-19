@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		75670D831DB7A6BF00F6EA18 /* FlatButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 75670D811DB7A6BF00F6EA18 /* FlatButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		75670D871DB7A6C900F6EA18 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
+		75670D941DB7AEF400F6EA18 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
 		75820B261D5A5B2400B98872 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75820B251D5A5B2400B98872 /* close@2x.png */; };
 		75935E2E1D534A1A0069AF86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E2D1D534A1A0069AF86 /* AppDelegate.swift */; };
 		75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75935E311D534A1A0069AF86 /* MainMenu.xib */; };
@@ -24,7 +24,7 @@
 		75935E2D1D534A1A0069AF86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75935E321D534A1A0069AF86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		75935E341D534A1A0069AF86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75935E3A1D534DD90069AF86 /* FlatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
+		75935E3A1D534DD90069AF86 /* FlatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlatButton.swift; path = FlatButton/FlatButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +57,7 @@
 		75935E211D534A1A0069AF86 = {
 			isa = PBXGroup;
 			children = (
+				75935E3A1D534DD90069AF86 /* FlatButton.swift */,
 				75935E2C1D534A1A0069AF86 /* FlatButton-macOS */,
 				75670D801DB7A6BF00F6EA18 /* FlatButton */,
 				75935E2B1D534A1A0069AF86 /* Products */,
@@ -76,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				75935E2D1D534A1A0069AF86 /* AppDelegate.swift */,
-				75935E3A1D534DD90069AF86 /* FlatButton.swift */,
 				75935E311D534A1A0069AF86 /* MainMenu.xib */,
 				75820B251D5A5B2400B98872 /* close@2x.png */,
 				75935E341D534A1A0069AF86 /* Info.plist */,
@@ -147,6 +147,7 @@
 					75670D7E1DB7A6BF00F6EA18 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = ZQK6SX26CE;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					75935E291D534A1A0069AF86 = {
@@ -200,7 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75670D871DB7A6C900F6EA18 /* FlatButton.swift in Sources */,
+				75670D941DB7AEF400F6EA18 /* FlatButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +231,7 @@
 		75670D851DB7A6BF00F6EA18 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -242,10 +244,11 @@
 				INFOPLIST_FILE = FlatButton/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.cindori.FlatButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -255,6 +258,7 @@
 		75670D861DB7A6BF00F6EA18 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -267,7 +271,7 @@
 				INFOPLIST_FILE = FlatButton/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.cindori.FlatButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
