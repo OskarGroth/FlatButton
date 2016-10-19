@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		75670D831DB7A6BF00F6EA18 /* FlatButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 75670D811DB7A6BF00F6EA18 /* FlatButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75670D871DB7A6C900F6EA18 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
-		75670D881DB7A74800F6EA18 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75935E341D534A1A0069AF86 /* Info.plist */; };
-		75670D891DB7A74A00F6EA18 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75670D821DB7A6BF00F6EA18 /* Info.plist */; };
 		75820B261D5A5B2400B98872 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75820B251D5A5B2400B98872 /* close@2x.png */; };
 		75935E2E1D534A1A0069AF86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E2D1D534A1A0069AF86 /* AppDelegate.swift */; };
 		75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75935E311D534A1A0069AF86 /* MainMenu.xib */; };
@@ -183,7 +181,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75670D891DB7A74A00F6EA18 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +190,6 @@
 			files = (
 				75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */,
 				75820B261D5A5B2400B98872 /* close@2x.png in Resources */,
-				75670D881DB7A74800F6EA18 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +405,7 @@
 				75670D861DB7A6BF00F6EA18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75935E251D534A1A0069AF86 /* Build configuration list for PBXProject "FlatButton" */ = {
 			isa = XCConfigurationList;
