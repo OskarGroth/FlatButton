@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name              = 'FlatButton'
-s.version           = '1.0.2'
+s.version           = '1.0.3'
 s.summary           = 'Layer based NSButton with Interface Builder styling options'
 s.homepage          = 'https://github.com/OskarGroth/FlatButton'
 s.license           = {
@@ -18,7 +18,7 @@ s.source            = {
 s.platform     = :osx, '10.9'
 s.source_files = 'FlatButton/FlatButton.{swift}'
 s.requires_arc = true
-s.screenshot   = "https://s3.amazonaws.com/cindori/images/FlatButton.png"
+s.screenshot   = "https://raw.githubusercontent.com/OskarGroth/FlatButton/master/screenshot.png"
 s.social_media_url = "https://twitter.com/cindoriapps"
 
 end
