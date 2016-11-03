@@ -193,7 +193,14 @@ public class FlatButton: NSButton, CALayerDelegate {
         let borderColor = bgColor
         layer?.animate(color: bgColor.cgColor, keyPath: "backgroundColor", duration: duration)
         layer?.animate(color: borderColor.cgColor, keyPath: "borderColor", duration: duration)
-        titleLayer.animate(color: titleColor.cgColor, keyPath: "foregroundColor", duration: duration)
+        
+        /*  I started seeing high (~5%) background CPU usage in apps using
+            FlatButton, and was able to track it down to background CATextLayer animation calls
+            happening constantly, originating from the call below. It could be a CATextLayer bug.
+            For now I'm going with setting the color instantly as it fixes this issue. */
+        //titleLayer.animate(color: titleColor.cgColor, keyPath: "foregroundColor", duration: duration)
+        titleLayer.foregroundColor = titleColor.cgColor
+        
         iconLayer.animate(color: imageColor.cgColor, keyPath: "backgroundColor", duration: duration)
     }
     
