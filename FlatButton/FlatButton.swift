@@ -139,15 +139,14 @@ public class FlatButton: NSButton, CALayerDelegate {
     }
     
     internal func setupTitle() {
-        guard let layer = layer else {
-            return
-        }
         guard let font = font else {
             return
         }
+        var titleRect = cell!.titleRect(forBounds: bounds)
         let attributes = [NSFontAttributeName: font]
         let size = title.size(withAttributes: attributes)
-        titleLayer.frame = NSMakeRect(round((layer.frame.width-size.width)/2), round((layer.frame.height-size.height)/2), size.width, size.height)
+        titleRect.origin.x = round((bounds.width - size.width)/2)
+        titleLayer.frame = titleRect
         titleLayer.string = title
         titleLayer.font = font
         titleLayer.fontSize = font.pointSize
@@ -159,7 +158,8 @@ public class FlatButton: NSButton, CALayerDelegate {
         }
         let maskLayer = CALayer()
         let imageSize = image.size
-        maskLayer.frame = NSMakeRect(round((bounds.width-imageSize.width)/2), round((bounds.height-imageSize.height)/2), imageSize.width, imageSize.height)
+        let iconRect = cell!.imageRect(forBounds: bounds)
+        maskLayer.frame = iconRect
         var imageRect:CGRect = NSMakeRect(0, 0, imageSize.width, imageSize.height)
         let imageRef = image.cgImage(forProposedRect: &imageRect, context: nil, hints: nil)
         maskLayer.contents = imageRef
