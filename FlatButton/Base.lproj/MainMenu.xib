@@ -733,7 +733,7 @@
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGx-ll-GI1" customClass="FlatButton" customModule="FlatButton_Example" customModuleProvider="target">
                         <rect key="frame" x="349" y="170" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSBookmarksTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ywI-Fd-2ZO">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSBookmarksTemplate" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ywI-Fd-2ZO">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -780,7 +780,7 @@
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E4h-Kk-N40" customClass="FlatButton" customModule="FlatButton_Example" customModuleProvider="target">
                         <rect key="frame" x="106" y="260" width="120" height="38"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Button" bezelStyle="shadowlessSquare" imagePosition="above" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DJi-tN-P3q">
+                        <buttonCell key="cell" type="square" title="Button" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DJi-tN-P3q">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -812,6 +812,47 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="YES"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="offAnimationDuration">
                                 <real key="value" value="0.20000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="onAnimationDuration">
+                                <real key="value" value="0.10000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-SW-dok" customClass="FlatButton" customModule="FlatButton_Example" customModuleProvider="target">
+                        <rect key="frame" x="188" y="92" width="120" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="square" title="Button" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="below" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FDg-tb-gzV">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
+                                <color key="value" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                <color key="value" red="0.2392156869" green="0.67450982329999998" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="activeIconColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="activeTextColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="NO"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="offAnimationDuration">
+                                <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="onAnimationDuration">
                                 <real key="value" value="0.10000000000000001"/>

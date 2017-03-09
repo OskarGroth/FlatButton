@@ -156,8 +156,27 @@ public class FlatButton: NSButton, CALayerDelegate {
         var titleRect = cell!.titleRect(forBounds: bounds)
         let attributes = [NSFontAttributeName: font]
         let size = title.size(withAttributes: attributes)
-        titleRect.origin.x = round((bounds.width - size.width)/2)
-        titleRect.origin.y = round((bounds.height - size.height)/2)
+        switch imagePosition {
+        case .imageAbove:
+            titleRect.origin.y = bounds.height - size.height - 1
+            titleRect.origin.x = round((bounds.width - size.width)/2)
+            break
+        case .imageBelow:
+            titleRect.origin.y = 1
+            titleRect.origin.x = round((bounds.width - size.width)/2)
+            break
+        case .imageLeft:
+            titleRect.origin.y = round((bounds.width - size.width)/2)
+            titleRect.origin.x = bounds.width - size.width + 1
+            break
+        case .imageRight:
+            titleRect.origin.y = round((bounds.width - size.width)/2)
+            titleRect.origin.x = 1
+            break
+        default:
+            titleRect.origin.y = round((bounds.height - size.height)/2)
+            titleRect.origin.x = round((bounds.width - size.width)/2)
+        }
         titleLayer.frame = titleRect
         titleLayer.string = title
         titleLayer.font = font

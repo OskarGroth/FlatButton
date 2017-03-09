@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		75670D831DB7A6BF00F6EA18 /* FlatButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 75670D811DB7A6BF00F6EA18 /* FlatButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75670D941DB7AEF400F6EA18 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
-		75820B261D5A5B2400B98872 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75820B251D5A5B2400B98872 /* close@2x.png */; };
 		75935E2E1D534A1A0069AF86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E2D1D534A1A0069AF86 /* AppDelegate.swift */; };
 		75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75935E311D534A1A0069AF86 /* MainMenu.xib */; };
 		75935E3C1D534DD90069AF86 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
@@ -19,7 +18,6 @@
 		75670D7F1DB7A6BF00F6EA18 /* FlatButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FlatButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75670D811DB7A6BF00F6EA18 /* FlatButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlatButton.h; sourceTree = "<group>"; };
 		75670D821DB7A6BF00F6EA18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75820B251D5A5B2400B98872 /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		75935E2A1D534A1A0069AF86 /* FlatButton-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlatButton-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75935E2D1D534A1A0069AF86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75935E321D534A1A0069AF86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 			children = (
 				75935E2D1D534A1A0069AF86 /* AppDelegate.swift */,
 				75935E311D534A1A0069AF86 /* MainMenu.xib */,
-				75820B251D5A5B2400B98872 /* close@2x.png */,
 				75935E341D534A1A0069AF86 /* Info.plist */,
 			);
 			name = "FlatButton-macOS";
@@ -190,7 +187,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */,
-				75820B261D5A5B2400B98872 /* close@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
