@@ -56,6 +56,16 @@ public class FlatButton: NSButton, CALayerDelegate {
             layer?.borderWidth = borderWidth
         }
     }
+    @IBInspectable public var borderColor: NSColor = NSColor.darkGray {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var activeBorderColor: NSColor = NSColor.white {
+        didSet {
+            animateColor(state == NSOnState)
+        }
+    }
     @IBInspectable public var buttonColor: NSColor = NSColor.darkGray {
         didSet {
             animateColor(state == NSOnState)
@@ -86,6 +96,7 @@ public class FlatButton: NSButton, CALayerDelegate {
             animateColor(state == NSOnState)
         }
     }
+    
     override public var title: String {
         didSet {
             setupTitle()
@@ -146,6 +157,7 @@ public class FlatButton: NSButton, CALayerDelegate {
         let attributes = [NSFontAttributeName: font]
         let size = title.size(withAttributes: attributes)
         titleRect.origin.x = round((bounds.width - size.width)/2)
+        titleRect.origin.y = round((bounds.height - size.height)/2)
         titleLayer.frame = titleRect
         titleLayer.string = title
         titleLayer.font = font
@@ -174,7 +186,7 @@ public class FlatButton: NSButton, CALayerDelegate {
     }
     
     // MARK: Animations
-
+    
     internal func removeAnimations() {
         layer?.removeAllAnimations()
         if layer?.sublayers != nil {
@@ -190,14 +202,14 @@ public class FlatButton: NSButton, CALayerDelegate {
         let bgColor = isOn ? activeButtonColor : buttonColor
         let titleColor = isOn ? activeTextColor : textColor
         let imageColor = isOn ? activeIconColor : iconColor
-        let borderColor = bgColor
+        let borderColor = isOn ? activeBorderColor : self.borderColor
         layer?.animate(color: bgColor.cgColor, keyPath: "backgroundColor", duration: duration)
         layer?.animate(color: borderColor.cgColor, keyPath: "borderColor", duration: duration)
         
         /*  I started seeing high (~5%) background CPU usage in apps using
-            FlatButton, and was able to track it down to background CATextLayer animation calls
-            happening constantly, originating from the call below. It could be a CATextLayer bug.
-            For now I'm going with setting the color instantly as it fixes this issue. */
+         FlatButton, and was able to track it down to background CATextLayer animation calls
+         happening constantly, originating from the call below. It could be a CATextLayer bug.
+         For now I'm going with setting the color instantly as it fixes this issue. */
         //titleLayer.animate(color: titleColor.cgColor, keyPath: "foregroundColor", duration: duration)
         titleLayer.foregroundColor = titleColor.cgColor
         
