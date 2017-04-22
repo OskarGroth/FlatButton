@@ -19,6 +19,7 @@ Note that FlatButton is Swift 3 only.
 Create an `NSButton` in Interface Builder and set it's class to `FlatButton`.
 You can now style your button from the inspector:
 
+![FlatButton for macOS](https://s3.amazonaws.com/cindori/images/inspector.png "FlatButton for macOS")
 
 The same values can be accessed from your code.
 
