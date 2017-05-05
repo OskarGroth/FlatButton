@@ -153,34 +153,52 @@ public class FlatButton: NSButton, CALayerDelegate {
         guard let font = font else {
             return
         }
-        var titleRect = cell!.titleRect(forBounds: bounds)
-        let attributes = [NSFontAttributeName: font]
-        let size = title.size(withAttributes: attributes)
-        switch imagePosition {
-        case .imageAbove:
-            titleRect.origin.y = bounds.height - size.height - 1
-            titleRect.origin.x = round((bounds.width - size.width)/2)
-            break
-        case .imageBelow:
-            titleRect.origin.y = 1
-            titleRect.origin.x = round((bounds.width - size.width)/2)
-            break
-        case .imageLeft:
-            titleRect.origin.y = round((bounds.width - size.width)/2)
-            titleRect.origin.x = bounds.width - size.width + 1
-            break
-        case .imageRight:
-            titleRect.origin.y = round((bounds.width - size.width)/2)
-            titleRect.origin.x = 1
-            break
-        default:
-            titleRect.origin.y = round((bounds.height - size.height)/2)
-            titleRect.origin.x = round((bounds.width - size.width)/2)
-        }
-        titleLayer.frame = titleRect
         titleLayer.string = title
         titleLayer.font = font
         titleLayer.fontSize = font.pointSize
+        positionTitleAndImage()
+    }
+    
+    func positionTitleAndImage() {
+        var titleRect = cell!.titleRect(forBounds: bounds)
+        let attributes = [NSFontAttributeName: font]
+        let titleSize = title.size(withAttributes: attributes)
+        var imageRect = iconLayer.frame
+        let hSpacing = round((bounds.width-(imageRect.width+titleSize.width))/3)
+        let vSpacing = round((bounds.height-(imageRect.height+titleSize.height))/3)
+
+        switch imagePosition {
+        case .imageAbove:
+            titleRect.origin.y = bounds.height-vSpacing-titleRect.height
+            titleRect.origin.x = round((bounds.width - titleSize.width)/2)
+            imageRect.origin.y = vSpacing
+            imageRect.origin.x = round((bounds.width - imageRect.width)/2)
+            break
+        case .imageBelow:
+            titleRect.origin.y = vSpacing
+            titleRect.origin.x = round((bounds.width - titleSize.width)/2)
+            imageRect.origin.y = bounds.height-vSpacing-imageRect.height
+            imageRect.origin.x = round((bounds.width - imageRect.width)/2)
+            break
+        case .imageLeft:
+            titleRect.origin.y = round((bounds.height - titleSize.height)/2)
+            titleRect.origin.x = hSpacing + imageRect.width + hSpacing
+            imageRect.origin.y = round((bounds.height - imageRect.height)/2)
+            imageRect.origin.x = hSpacing
+            break
+        case .imageRight:
+            titleRect.origin.y = round((bounds.height - titleSize.height)/2)
+            titleRect.origin.x = hSpacing
+            imageRect.origin.y = round((bounds.width - imageRect.width)/2)
+            imageRect.origin.x = hSpacing + imageRect.width + hSpacing
+            break
+        default:
+            titleRect.origin.y = round((bounds.height - titleSize.height)/2)
+            titleRect.origin.x = round((bounds.width - titleSize.width)/2)
+        }
+        iconLayer.frame = imageRect
+        titleLayer.frame = titleRect
+        
     }
     
     internal func setupImage() {
@@ -190,12 +208,13 @@ public class FlatButton: NSButton, CALayerDelegate {
         let maskLayer = CALayer()
         let imageSize = image.size
         let iconRect = cell!.imageRect(forBounds: bounds)
-        maskLayer.frame = iconRect
         var imageRect:CGRect = NSMakeRect(0, 0, imageSize.width, imageSize.height)
         let imageRef = image.cgImage(forProposedRect: &imageRect, context: nil, hints: nil)
         maskLayer.contents = imageRef
-        iconLayer.frame = bounds
+        iconLayer.frame = imageRect
+        maskLayer.frame = imageRect
         iconLayer.mask = maskLayer
+        positionTitleAndImage()
     }
     
     override public func awakeFromNib() {
