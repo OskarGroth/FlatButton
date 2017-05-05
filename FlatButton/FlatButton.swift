@@ -161,7 +161,7 @@ public class FlatButton: NSButton, CALayerDelegate {
     
     func positionTitleAndImage() {
         var titleRect = cell!.titleRect(forBounds: bounds)
-        let attributes = [NSFontAttributeName: font]
+        let attributes = [NSFontAttributeName: font as Any]
         let titleSize = title.size(withAttributes: attributes)
         var imageRect = iconLayer.frame
         let hSpacing = round((bounds.width-(imageRect.width+titleSize.width))/3)
@@ -207,7 +207,6 @@ public class FlatButton: NSButton, CALayerDelegate {
         }
         let maskLayer = CALayer()
         let imageSize = image.size
-        let iconRect = cell!.imageRect(forBounds: bounds)
         var imageRect:CGRect = NSMakeRect(0, 0, imageSize.width, imageSize.height)
         let imageRef = image.cgImage(forProposedRect: &imageRect, context: nil, hints: nil)
         maskLayer.contents = imageRef
