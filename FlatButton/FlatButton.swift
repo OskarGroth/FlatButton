@@ -44,7 +44,7 @@ public class FlatButton: NSButton, CALayerDelegate {
             animateColor(state == NSOnState)
         }
     }
-    @IBInspectable public var onAnimationDuration: Double = 0.01
+    @IBInspectable public var onAnimationDuration: Double = 0
     @IBInspectable public var offAnimationDuration: Double = 0.1
     @IBInspectable public var cornerRadius: CGFloat = 4 {
         didSet {
