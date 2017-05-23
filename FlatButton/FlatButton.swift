@@ -307,4 +307,10 @@ public class FlatButton: NSButton, CALayerDelegate {
         
     }
     
+    override public func layout() {
+        super.layout()
+        setupTitle()
+        setupImage()
+    }
+    
 }
