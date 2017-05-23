@@ -729,53 +729,6 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGx-ll-GI1" customClass="FlatButton" customModule="FlatButton_Example" customModuleProvider="target">
-                        <rect key="frame" x="106" y="200" width="50" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSBookmarksTemplate" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ywI-Fd-2ZO">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="25"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="1"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
-                                <color key="value" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
-                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                <color key="value" red="0.42465101522842641" green="0.23259536125797645" blue="0.22464185002913825" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="activeIconColor">
-                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="activeTextColor">
-                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="NO"/>
-                            <userDefinedRuntimeAttribute type="number" keyPath="offAnimationDuration">
-                                <real key="value" value="0.20000000000000001"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="onAnimationDuration">
-                                <real key="value" value="0.10000000000000001"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.42465101519999998" green="0.2325953613" blue="0.22464185" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="activeBorderColor">
-                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-SW-dok" customClass="FlatButton" customModule="FlatButton_Example" customModuleProvider="target">
                         <rect key="frame" x="79" y="50" width="86" height="53"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -911,29 +864,29 @@
                             </customView>
                         </subviews>
                     </visualEffectView>
-                    <button identifier="Health" verticalHuggingPriority="750" fixedFrame="YES" tag="1" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MtH-Eb-8he" customClass="FlatButton" customModule="FlatButton_Example" customModuleProvider="target">
-                        <rect key="frame" x="233" y="240" width="65" height="50"/>
+                    <button identifier="Trim" verticalHuggingPriority="750" fixedFrame="YES" tag="2" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4lf-3T-Trc" customClass="FlatButton" customModule="FlatButton_Example" customModuleProvider="target">
+                        <rect key="frame" x="134" y="243" width="65" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Health" bezelStyle="shadowlessSquare" image="NSUser" imagePosition="above" alignment="center" alternateImage="NSActionTemplate" imageScaling="proportionallyDown" inset="2" id="Zy3-Ue-GoW">
+                        <buttonCell key="cell" type="square" title="Trim" bezelStyle="shadowlessSquare" image="trim" imagePosition="above" alignment="center" alternateImage="trim" state="on" inset="2" id="pJ2-Au-hki">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="NO"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
+                                <color key="value" red="0.98429246020000005" green="0.98429246020000005" blue="0.98429246020000005" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
+                                <color key="value" red="0.98429246020000005" green="0.98429246020000005" blue="0.98429246020000005" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                <color key="value" red="0.3885267973" green="0.37885233759999998" blue="0.498132199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="value" red="0.30822597099999999" green="0.34609693679999998" blue="0.38832893969999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="activeIconColor">
                                 <color key="value" red="0.35108801719999999" green="0.61798810959999995" blue="0.97262704369999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
-                                <color key="value" red="0.46867068527918787" green="0.13699394668661796" blue="0.11948643862166328" alpha="0.36081977739726029" colorSpace="custom" customColorSpace="displayP3"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="NO"/>
-                            <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
-                                <color key="value" red="0.30415212563451777" green="0.30415212563451777" blue="0.30415212563451777" alpha="0.72169306506849318" colorSpace="custom" customColorSpace="displayP3"/>
-                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                <color key="value" red="0.3885267973" green="0.37885233759999998" blue="0.498132199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="value" red="0.30822597099999999" green="0.34609693679999998" blue="0.38832893969999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="activeTextColor">
                                 <color key="value" red="0.35108801719999999" green="0.61798810959999995" blue="0.97262704369999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -942,22 +895,25 @@
                                 <real key="value" value="0.0"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="onAnimationDuration">
-                                <real key="value" value="1"/>
+                                <real key="value" value="0.0"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="offAnimationDuration">
-                                <real key="value" value="1"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="glowRadius">
+                                <real key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="glowOpacity">
+                                <real key="value" value="0.80000000000000004"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="93.5" y="-147"/>
+            <point key="canvasLocation" x="271.5" y="-530"/>
         </window>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSApplicationIcon" width="128" height="128"/>
-        <image name="NSBookmarksTemplate" width="17" height="18"/>
         <image name="NSUser" width="32" height="32"/>
+        <image name="trim" width="29" height="28"/>
     </resources>
 </document>

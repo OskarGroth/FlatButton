@@ -36,6 +36,7 @@ internal extension NSColor {
 
 public class FlatButton: NSButton, CALayerDelegate {
     
+    internal var containerLayer = CALayer()
     internal var iconLayer = CAShapeLayer()
     internal var alternateIconLayer = CAShapeLayer()
     internal var titleLayer = CATextLayer()
@@ -47,6 +48,18 @@ public class FlatButton: NSButton, CALayerDelegate {
     }
     @IBInspectable public var onAnimationDuration: Double = 0
     @IBInspectable public var offAnimationDuration: Double = 0.1
+    @IBInspectable public var glowRadius: CGFloat = 0 {
+        didSet {
+            containerLayer.shadowRadius = glowRadius
+            animateColor(state == NSOnState)
+        }
+    }
+    @IBInspectable public var glowOpacity: Float = 0 {
+        didSet {
+            containerLayer.shadowOpacity = glowOpacity
+            animateColor(state == NSOnState)
+        }
+    }
     @IBInspectable public var cornerRadius: CGFloat = 4 {
         didSet {
             layer?.cornerRadius = cornerRadius
@@ -150,9 +163,15 @@ public class FlatButton: NSButton, CALayerDelegate {
         titleLayer.delegate = self
         iconLayer.delegate = self
         alternateIconLayer.delegate = self
-        layer?.addSublayer(titleLayer)
-        layer?.addSublayer(iconLayer)
-        layer?.addSublayer(alternateIconLayer)
+        iconLayer.masksToBounds = true
+        alternateIconLayer.masksToBounds = true
+        containerLayer.shadowOffset = NSSize.zero
+        containerLayer.shadowColor = NSColor.clear.cgColor
+        containerLayer.frame = NSMakeRect(0, 0, bounds.width, bounds.height)
+        containerLayer.addSublayer(iconLayer)
+        containerLayer.addSublayer(alternateIconLayer)
+        containerLayer.addSublayer(titleLayer)
+        layer?.addSublayer(containerLayer)
         setupTitle()
         setupImage()
     }
@@ -233,7 +252,6 @@ public class FlatButton: NSButton, CALayerDelegate {
             alternateIconLayer.mask = altMaskLayer
             alternateIconLayer.frame = altImageRect
         }
-
         positionTitleAndImage()
     }
     
@@ -276,6 +294,12 @@ public class FlatButton: NSButton, CALayerDelegate {
         } else {
             iconLayer.animate(color: isOn ? NSColor.clear.cgColor : iconColor.cgColor, keyPath: "backgroundColor", duration: duration)
             alternateIconLayer.animate(color: isOn ? activeIconColor.cgColor : NSColor.clear.cgColor, keyPath: "backgroundColor", duration: duration)
+        }
+        
+        // Shadows
+        
+        if glowRadius > 0, glowOpacity > 0 {
+            containerLayer.animate(color: isOn ? activeIconColor.cgColor : NSColor.clear.cgColor, keyPath: "shadowColor", duration: duration)
         }
     }
     
