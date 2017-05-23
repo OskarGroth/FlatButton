@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		755BCFD81ED4312A00E57794 /* trim@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 755BCFD71ED4312A00E57794 /* trim@1x.png */; };
-		755BCFDA1ED4315300E57794 /* trim@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 755BCFD91ED4315300E57794 /* trim@2x.png */; };
 		75670D831DB7A6BF00F6EA18 /* FlatButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 75670D811DB7A6BF00F6EA18 /* FlatButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75670D941DB7AEF400F6EA18 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E3A1D534DD90069AF86 /* FlatButton.swift */; };
 		75935E2E1D534A1A0069AF86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75935E2D1D534A1A0069AF86 /* AppDelegate.swift */; };
@@ -17,8 +15,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		755BCFD71ED4312A00E57794 /* trim@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trim@1x.png"; sourceTree = "<group>"; };
-		755BCFD91ED4315300E57794 /* trim@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trim@2x.png"; sourceTree = "<group>"; };
 		75670D7F1DB7A6BF00F6EA18 /* FlatButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FlatButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75670D811DB7A6BF00F6EA18 /* FlatButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlatButton.h; sourceTree = "<group>"; };
 		75670D821DB7A6BF00F6EA18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,8 +77,6 @@
 				75935E2D1D534A1A0069AF86 /* AppDelegate.swift */,
 				75935E311D534A1A0069AF86 /* MainMenu.xib */,
 				75935E341D534A1A0069AF86 /* Info.plist */,
-				755BCFD71ED4312A00E57794 /* trim@1x.png */,
-				755BCFD91ED4315300E57794 /* trim@2x.png */,
 			);
 			name = "FlatButton-macOS";
 			path = FlatButton;
@@ -193,8 +187,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75935E331D534A1A0069AF86 /* MainMenu.xib in Resources */,
-				755BCFD81ED4312A00E57794 /* trim@1x.png in Resources */,
-				755BCFDA1ED4315300E57794 /* trim@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

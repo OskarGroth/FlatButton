@@ -37,6 +37,7 @@ internal extension NSColor {
 public class FlatButton: NSButton, CALayerDelegate {
     
     internal var iconLayer = CAShapeLayer()
+    internal var alternateIconLayer = CAShapeLayer()
     internal var titleLayer = CATextLayer()
     internal var mouseDown = Bool()
     @IBInspectable public var momentary: Bool = true {
@@ -117,6 +118,11 @@ public class FlatButton: NSButton, CALayerDelegate {
             setupImage()
         }
     }
+    override public var alternateImage: NSImage? {
+        didSet {
+            setupImage()
+        }
+    }
     override public var isEnabled: Bool {
         didSet {
             alphaValue = isEnabled ? 1 : 0.5
@@ -143,7 +149,9 @@ public class FlatButton: NSButton, CALayerDelegate {
         layer?.delegate = self
         titleLayer.delegate = self
         iconLayer.delegate = self
+        alternateIconLayer.delegate = self
         layer?.addSublayer(titleLayer)
+        layer?.addSublayer(alternateIconLayer)
         layer?.addSublayer(iconLayer)
         setupTitle()
         setupImage()
@@ -197,6 +205,7 @@ public class FlatButton: NSButton, CALayerDelegate {
             titleRect.origin.x = round((bounds.width - titleSize.width)/2)
         }
         iconLayer.frame = imageRect
+        alternateIconLayer.frame = imageRect
         titleLayer.frame = titleRect
     }
     
@@ -212,6 +221,19 @@ public class FlatButton: NSButton, CALayerDelegate {
         iconLayer.frame = imageRect
         maskLayer.frame = imageRect
         iconLayer.mask = maskLayer
+        
+        if let alternateImage = alternateImage {
+            let altMaskLayer = CALayer()
+            let altImageSize = alternateImage.size
+            var altImageRect:CGRect = NSMakeRect(0, 0, altImageSize.width, altImageSize.height)
+            let altImageRef = image.cgImage(forProposedRect: &altImageRect, context: nil, hints: nil)
+            altMaskLayer.contents = altImageRef
+            alternateIconLayer.frame = altImageRect
+            altMaskLayer.frame = altImageRect
+            alternateIconLayer.mask = altMaskLayer
+            alternateIconLayer.frame = altImageRect
+        }
+
         positionTitleAndImage()
     }
     
@@ -249,7 +271,12 @@ public class FlatButton: NSButton, CALayerDelegate {
         //titleLayer.animate(color: titleColor.cgColor, keyPath: "foregroundColor", duration: duration)
         titleLayer.foregroundColor = titleColor.cgColor
         
-        iconLayer.animate(color: imageColor.cgColor, keyPath: "backgroundColor", duration: duration)
+        if alternateImage == nil {
+            iconLayer.animate(color: imageColor.cgColor, keyPath: "backgroundColor", duration: duration)
+        } else {
+            iconLayer.animate(color: isOn ? NSColor.clear.cgColor : iconColor.cgColor, keyPath: "backgroundColor", duration: duration)
+            alternateIconLayer.animate(color: isOn ? activeIconColor.cgColor : NSColor.clear.cgColor, keyPath: "backgroundColor", duration: duration)
+        }
     }
     
     // MARK: Interaction
