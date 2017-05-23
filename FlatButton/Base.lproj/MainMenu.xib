@@ -911,6 +911,44 @@
                             </customView>
                         </subviews>
                     </visualEffectView>
+                    <button identifier="Health" verticalHuggingPriority="750" fixedFrame="YES" tag="1" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MtH-Eb-8he" customClass="FlatButton" customModule="FlatButton_Example" customModuleProvider="target">
+                        <rect key="frame" x="233" y="240" width="65" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="square" title="Health" bezelStyle="shadowlessSquare" image="NSUser" imagePosition="above" alignment="center" alternateImage="NSActionTemplate" imageScaling="proportionallyDown" inset="2" id="Zy3-Ue-GoW">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                <color key="value" red="0.3885267973" green="0.37885233759999998" blue="0.498132199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="activeIconColor">
+                                <color key="value" red="0.35108801719999999" green="0.61798810959999995" blue="0.97262704369999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
+                                <color key="value" red="0.46867068527918787" green="0.13699394668661796" blue="0.11948643862166328" alpha="0.36081977739726029" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="NO"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
+                                <color key="value" red="0.30415212563451777" green="0.30415212563451777" blue="0.30415212563451777" alpha="0.72169306506849318" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.3885267973" green="0.37885233759999998" blue="0.498132199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="activeTextColor">
+                                <color key="value" red="0.35108801719999999" green="0.61798810959999995" blue="0.97262704369999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="onAnimationDuration">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="offAnimationDuration">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
                 </subviews>
             </view>
             <point key="canvasLocation" x="93.5" y="-147"/>

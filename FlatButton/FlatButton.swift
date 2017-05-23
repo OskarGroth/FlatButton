@@ -226,7 +226,7 @@ public class FlatButton: NSButton, CALayerDelegate {
             let altMaskLayer = CALayer()
             let altImageSize = alternateImage.size
             var altImageRect:CGRect = NSMakeRect(0, 0, altImageSize.width, altImageSize.height)
-            let altImageRef = image.cgImage(forProposedRect: &altImageRect, context: nil, hints: nil)
+            let altImageRef = alternateImage.cgImage(forProposedRect: &altImageRect, context: nil, hints: nil)
             altMaskLayer.contents = altImageRef
             alternateIconLayer.frame = altImageRect
             altMaskLayer.frame = altImageRect
