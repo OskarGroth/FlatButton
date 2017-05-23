@@ -151,8 +151,8 @@ public class FlatButton: NSButton, CALayerDelegate {
         iconLayer.delegate = self
         alternateIconLayer.delegate = self
         layer?.addSublayer(titleLayer)
-        layer?.addSublayer(alternateIconLayer)
         layer?.addSublayer(iconLayer)
+        layer?.addSublayer(alternateIconLayer)
         setupTitle()
         setupImage()
     }
