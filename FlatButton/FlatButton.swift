@@ -198,7 +198,6 @@ public class FlatButton: NSButton, CALayerDelegate {
         }
         iconLayer.frame = imageRect
         titleLayer.frame = titleRect
-        
     }
     
     internal func setupImage() {
@@ -309,8 +308,8 @@ public class FlatButton: NSButton, CALayerDelegate {
     
     override public func layout() {
         super.layout()
-        setupTitle()
-        setupImage()
+        positionTitleAndImage()
     }
+    
     
 }
