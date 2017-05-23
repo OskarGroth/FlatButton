@@ -898,10 +898,10 @@
                                 <real key="value" value="0.0"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="glowRadius">
-                                <real key="value" value="2"/>
+                                <real key="value" value="6"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="glowOpacity">
-                                <real key="value" value="0.80000000000000004"/>
+                                <real key="value" value="1.5"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>

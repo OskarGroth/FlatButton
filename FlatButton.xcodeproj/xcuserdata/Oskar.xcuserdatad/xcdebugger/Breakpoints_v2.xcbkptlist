@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlatButton/FlatButton.swift"
-            timestampString = "517241280.468007"
+            timestampString = "517241995.282755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "positionTitleAndImage()"
             landmarkType = "7">
          </BreakpointContent>

@@ -156,7 +156,8 @@ public class FlatButton: NSButton, CALayerDelegate {
     
     internal func setup() {
         wantsLayer = true
-        layer?.masksToBounds = true
+        layer?.masksToBounds = false
+        containerLayer.masksToBounds = false
         layer?.cornerRadius = 4
         layer?.borderWidth = 1
         layer?.delegate = self
