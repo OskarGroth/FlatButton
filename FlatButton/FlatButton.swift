@@ -123,7 +123,7 @@ public class FlatButton: NSButton, CALayerDelegate {
     }
     override public var frame: NSRect {
         didSet {
-            setupTitle()
+            positionTitleAndImage()
         }
     }
     override public var image: NSImage? {
@@ -141,6 +141,7 @@ public class FlatButton: NSButton, CALayerDelegate {
             alphaValue = isEnabled ? 1 : 0.5
         }
     }
+    
     
     // MARK: Setup & Initialization
     
@@ -161,6 +162,8 @@ public class FlatButton: NSButton, CALayerDelegate {
         layer?.cornerRadius = 4
         layer?.borderWidth = 1
         layer?.delegate = self
+        //containerLayer.backgroundColor = NSColor.blue.withAlphaComponent(0.1).cgColor
+        //titleLayer.backgroundColor = NSColor.red.withAlphaComponent(0.2).cgColor
         titleLayer.delegate = self
         iconLayer.delegate = self
         alternateIconLayer.delegate = self
@@ -188,37 +191,37 @@ public class FlatButton: NSButton, CALayerDelegate {
     }
     
     func positionTitleAndImage() {
-        var titleRect = cell!.titleRect(forBounds: bounds)
         let attributes = [NSFontAttributeName: font as Any]
         let titleSize = title.size(withAttributes: attributes)
+        var titleRect = NSMakeRect(0, 0, titleSize.width, titleSize.height)
         var imageRect = iconLayer.frame
         let hSpacing = round((bounds.width-(imageRect.width+titleSize.width))/3)
         let vSpacing = round((bounds.height-(imageRect.height+titleSize.height))/3)
-
+        
         switch imagePosition {
         case .imageAbove:
-            titleRect.origin.y = bounds.height-vSpacing-titleRect.height
+            titleRect.origin.y = bounds.height-titleRect.height - 2
             titleRect.origin.x = round((bounds.width - titleSize.width)/2)
             imageRect.origin.y = vSpacing
             imageRect.origin.x = round((bounds.width - imageRect.width)/2)
             break
         case .imageBelow:
-            titleRect.origin.y = vSpacing
+            titleRect.origin.y = 2
             titleRect.origin.x = round((bounds.width - titleSize.width)/2)
             imageRect.origin.y = bounds.height-vSpacing-imageRect.height
             imageRect.origin.x = round((bounds.width - imageRect.width)/2)
             break
         case .imageLeft:
             titleRect.origin.y = round((bounds.height - titleSize.height)/2)
-            titleRect.origin.x = hSpacing + imageRect.width + hSpacing
+            titleRect.origin.x = bounds.width - titleSize.width - 2
             imageRect.origin.y = round((bounds.height - imageRect.height)/2)
             imageRect.origin.x = hSpacing
             break
         case .imageRight:
             titleRect.origin.y = round((bounds.height - titleSize.height)/2)
-            titleRect.origin.x = hSpacing
-            imageRect.origin.y = round((bounds.width - imageRect.width)/2)
-            imageRect.origin.x = hSpacing + imageRect.width + hSpacing
+            titleRect.origin.x = 2
+            imageRect.origin.y = round((bounds.height - imageRect.height)/2)
+            imageRect.origin.x = bounds.width - imageRect.width - hSpacing
             break
         default:
             titleRect.origin.y = round((bounds.height - titleSize.height)/2)
@@ -241,9 +244,11 @@ public class FlatButton: NSButton, CALayerDelegate {
         iconLayer.frame = imageRect
         maskLayer.frame = imageRect
         iconLayer.mask = maskLayer
+        //maskLayer.backgroundColor = NSColor.green.withAlphaComponent(0.5).cgColor
         
         if let alternateImage = alternateImage {
             let altMaskLayer = CALayer()
+            //altMaskLayer.backgroundColor = NSColor.green.withAlphaComponent(0.5).cgColor
             let altImageSize = alternateImage.size
             var altImageRect:CGRect = NSMakeRect(0, 0, altImageSize.width, altImageSize.height)
             let altImageRef = alternateImage.cgImage(forProposedRect: &altImageRect, context: nil, hints: nil)
@@ -361,6 +366,10 @@ public class FlatButton: NSButton, CALayerDelegate {
     override public func layout() {
         super.layout()
         positionTitleAndImage()
+    }
+    
+    override public func updateLayer() {
+        super.updateLayer()
     }
     
     
