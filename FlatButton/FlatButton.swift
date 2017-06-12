@@ -368,7 +368,7 @@ open class FlatButton: NSButton, CALayerDelegate {
         positionTitleAndImage()
     }
     
-    override public func updateLayer() {
+    override open func updateLayer() {
         super.updateLayer()
     }
     
