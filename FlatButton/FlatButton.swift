@@ -34,7 +34,7 @@ internal extension NSColor {
     }
 }
 
-public class FlatButton: NSButton, CALayerDelegate {
+open class FlatButton: NSButton, CALayerDelegate {
     
     internal var containerLayer = CALayer()
     internal var iconLayer = CAShapeLayer()
@@ -111,32 +111,32 @@ public class FlatButton: NSButton, CALayerDelegate {
         }
     }
     
-    override public var title: String {
+    override open var title: String {
         didSet {
             setupTitle()
         }
     }
-    override public var font: NSFont? {
+    override open var font: NSFont? {
         didSet {
             setupTitle()
         }
     }
-    override public var frame: NSRect {
+    override open var frame: NSRect {
         didSet {
             positionTitleAndImage()
         }
     }
-    override public var image: NSImage? {
+    override open var image: NSImage? {
         didSet {
             setupImage()
         }
     }
-    override public var alternateImage: NSImage? {
+    override open var alternateImage: NSImage? {
         didSet {
             setupImage()
         }
     }
-    override public var isEnabled: Bool {
+    override open var isEnabled: Bool {
         didSet {
             alphaValue = isEnabled ? 1 : 0.5
         }
@@ -261,7 +261,7 @@ public class FlatButton: NSButton, CALayerDelegate {
         positionTitleAndImage()
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         let trackingArea = NSTrackingArea(rect: bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil)
         addTrackingArea(trackingArea)
@@ -319,31 +319,31 @@ public class FlatButton: NSButton, CALayerDelegate {
         }
     }
     
-    override public func hitTest(_ point: NSPoint) -> NSView? {
+    override open func hitTest(_ point: NSPoint) -> NSView? {
         return isEnabled ? super.hitTest(point) : nil
     }
     
-    override public func mouseDown(with event: NSEvent) {
+    override open func mouseDown(with event: NSEvent) {
         if isEnabled {
             mouseDown = true
             setOn(state == NSOnState ? false : true)
         }
     }
     
-    override public func mouseEntered(with event: NSEvent) {
+    override open func mouseEntered(with event: NSEvent) {
         if mouseDown {
             setOn(state == NSOnState ? false : true)
         }
     }
     
-    override public func mouseExited(with event: NSEvent) {
+    override open func mouseExited(with event: NSEvent) {
         if mouseDown {
             setOn(state == NSOnState ? false : true)
             mouseDown = false
         }
     }
     
-    override public func mouseUp(with event: NSEvent) {
+    override open func mouseUp(with event: NSEvent) {
         if mouseDown {
             mouseDown = false
             if momentary {
@@ -355,20 +355,20 @@ public class FlatButton: NSButton, CALayerDelegate {
     
     // MARK: Drawing
     
-    override public func layer(_ layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool {
+    override open func layer(_ layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool {
         return true
     }
     
-    override public func draw(_ dirtyRect: NSRect) {
+    override open func draw(_ dirtyRect: NSRect) {
         
     }
     
-    override public func layout() {
+    override open func layout() {
         super.layout()
         positionTitleAndImage()
     }
     
-    override public func updateLayer() {
+    override open func updateLayer() {
         super.updateLayer()
     }
     
