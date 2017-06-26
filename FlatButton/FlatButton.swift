@@ -165,6 +165,9 @@ open class FlatButton: NSButton, CALayerDelegate {
         //containerLayer.backgroundColor = NSColor.blue.withAlphaComponent(0.1).cgColor
         //titleLayer.backgroundColor = NSColor.red.withAlphaComponent(0.2).cgColor
         titleLayer.delegate = self
+        if let scale = window?.backingScaleFactor {
+            titleLayer.contentsScale = scale
+        }
         iconLayer.delegate = self
         alternateIconLayer.delegate = self
         iconLayer.masksToBounds = true
@@ -213,7 +216,7 @@ open class FlatButton: NSButton, CALayerDelegate {
             break
         case .imageLeft:
             titleRect.origin.y = round((bounds.height - titleSize.height)/2)
-            titleRect.origin.x = bounds.width - titleSize.width - 2
+            titleRect.origin.x = bounds.width - titleSize.width - 6
             imageRect.origin.y = round((bounds.height - imageRect.height)/2)
             imageRect.origin.x = hSpacing
             break
@@ -354,6 +357,15 @@ open class FlatButton: NSButton, CALayerDelegate {
     }
     
     // MARK: Drawing
+    
+    override open func viewDidChangeBackingProperties() {
+        super.viewDidChangeBackingProperties()
+        if let scale = window?.backingScaleFactor {
+            titleLayer.contentsScale = scale
+            layer?.contentsScale = scale
+            iconLayer.contentsScale = scale
+        }
+    }
     
     override open func layer(_ layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool {
         return true
