@@ -28,7 +28,7 @@ internal extension CALayer {
 internal extension NSColor {
     internal func tintedColor() -> NSColor {
         var h = CGFloat(), s = CGFloat(), b = CGFloat(), a = CGFloat()
-        let rgbColor = usingColorSpaceName(NSCalibratedRGBColorSpace)
+        let rgbColor = usingColorSpaceName(NSColorSpaceName.calibratedRGB)
         rgbColor?.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         return NSColor(hue: h, saturation: s, brightness: b == 0 ? 0.2 : b * 0.8, alpha: a)
     }
@@ -43,7 +43,7 @@ open class FlatButton: NSButton, CALayerDelegate {
     internal var mouseDown = Bool()
     @IBInspectable public var momentary: Bool = true {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var onAnimationDuration: Double = 0
@@ -51,13 +51,13 @@ open class FlatButton: NSButton, CALayerDelegate {
     @IBInspectable public var glowRadius: CGFloat = 0 {
         didSet {
             containerLayer.shadowRadius = glowRadius
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var glowOpacity: Float = 0 {
         didSet {
             containerLayer.shadowOpacity = glowOpacity
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var cornerRadius: CGFloat = 4 {
@@ -72,42 +72,42 @@ open class FlatButton: NSButton, CALayerDelegate {
     }
     @IBInspectable public var borderColor: NSColor = NSColor.darkGray {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var activeBorderColor: NSColor = NSColor.white {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var buttonColor: NSColor = NSColor.darkGray {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var activeButtonColor: NSColor = NSColor.white {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var iconColor: NSColor = NSColor.gray {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var activeIconColor: NSColor = NSColor.black {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var textColor: NSColor = NSColor.gray {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     @IBInspectable public var activeTextColor: NSColor = NSColor.gray {
         didSet {
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     
@@ -194,7 +194,7 @@ open class FlatButton: NSButton, CALayerDelegate {
     }
     
     func positionTitleAndImage() {
-        let attributes = [NSFontAttributeName: font as Any]
+        let attributes = [NSAttributedStringKey.font: font as Any]
         let titleSize = title.size(withAttributes: attributes)
         var titleRect = NSMakeRect(0, 0, titleSize.width, titleSize.height)
         var imageRect = iconLayer.frame
@@ -315,10 +315,11 @@ open class FlatButton: NSButton, CALayerDelegate {
     // MARK: Interaction
     
     public func setOn(_ isOn: Bool) {
-        let nextState = isOn ? NSOnState : NSOffState
+//        let nextState = isOn ? .on : .off
+        let nextState = isOn ? NSControl.StateValue.on : NSControl.StateValue.off
         if nextState != state {
             state = nextState
-            animateColor(state == NSOnState)
+            animateColor(state == .on)
         }
     }
     
@@ -329,19 +330,19 @@ open class FlatButton: NSButton, CALayerDelegate {
     override open func mouseDown(with event: NSEvent) {
         if isEnabled {
             mouseDown = true
-            setOn(state == NSOnState ? false : true)
+            setOn(state == .on ? false : true)
         }
     }
     
     override open func mouseEntered(with event: NSEvent) {
         if mouseDown {
-            setOn(state == NSOnState ? false : true)
+            setOn(state == .on ? false : true)
         }
     }
     
     override open func mouseExited(with event: NSEvent) {
         if mouseDown {
-            setOn(state == NSOnState ? false : true)
+            setOn(state == .on ? false : true)
             mouseDown = false
         }
     }
@@ -350,7 +351,7 @@ open class FlatButton: NSButton, CALayerDelegate {
         if mouseDown {
             mouseDown = false
             if momentary {
-                setOn(state == NSOnState ? false : true)
+                setOn(state == .on ? false : true)
             }
             _ = target?.perform(action, with: self)
         }
@@ -386,3 +387,4 @@ open class FlatButton: NSButton, CALayerDelegate {
     
     
 }
+
