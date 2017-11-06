@@ -80,7 +80,7 @@ open class FlatButton: NSButton, CALayerDelegate {
             animateColor(state == .on)
         }
     }
-    @IBInspectable public var buttonColor: NSColor = NSColor.darkGray {
+    @IBInspectable public var buttonColor: NSColor = NSColor.white {
         didSet {
             animateColor(state == .on)
         }
