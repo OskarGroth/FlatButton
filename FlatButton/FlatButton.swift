@@ -373,7 +373,11 @@ open class FlatButton: NSButton, CALayerDelegate {
     }
     
     override open func draw(_ dirtyRect: NSRect) {
-        
+        // nop
+    }
+    
+    override open func drawFocusRingMask() {
+        self.bounds.fill()
     }
     
     override open func layout() {
@@ -384,7 +388,5 @@ open class FlatButton: NSButton, CALayerDelegate {
     override open func updateLayer() {
         super.updateLayer()
     }
-    
-    
 }
 
