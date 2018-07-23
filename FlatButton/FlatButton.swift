@@ -17,7 +17,7 @@ internal extension CALayer {
             animation.fromValue = value(forKey: keyPath)
             animation.duration = duration
             animation.isRemovedOnCompletion = false
-            animation.fillMode = kCAFillModeForwards
+            animation.fillMode = CAMediaTimingFillMode.forwards
             add(animation, forKey: keyPath)
             setValue(color, forKey: keyPath)
         }
@@ -194,7 +194,7 @@ open class FlatButton: NSButton, CALayerDelegate {
     }
     
     func positionTitleAndImage() {
-        let attributes = [NSAttributedStringKey.font: font as Any]
+        let attributes = [NSAttributedString.Key.font: font as Any]
         let titleSize = title.size(withAttributes: attributes)
         var titleRect = NSMakeRect(0, 0, titleSize.width, titleSize.height)
         var imageRect = iconLayer.frame
@@ -315,7 +315,7 @@ open class FlatButton: NSButton, CALayerDelegate {
     // MARK: Interaction
     
     public func setOn(_ isOn: Bool) {
-//        let nextState = isOn ? .on : .off
+        //        let nextState = isOn ? .on : .off
         let nextState = isOn ? NSControl.StateValue.on : NSControl.StateValue.off
         if nextState != state {
             state = nextState
