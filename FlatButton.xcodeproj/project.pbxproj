@@ -147,7 +147,7 @@
 					75670D7E1DB7A6BF00F6EA18 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = ZQK6SX26CE;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					75935E291D534A1A0069AF86 = {
@@ -249,7 +249,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -275,7 +275,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.cindori.FlatButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
