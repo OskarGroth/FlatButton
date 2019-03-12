@@ -315,7 +315,7 @@ open class FlatButton: NSButton, CALayerDelegate {
     // MARK: Interaction
     
     public func setOn(_ isOn: Bool) {
-//        let nextState = isOn ? .on : .off
+        //        let nextState = isOn ? .on : .off
         let nextState = isOn ? NSControl.StateValue.on : NSControl.StateValue.off
         if nextState != state {
             state = nextState
